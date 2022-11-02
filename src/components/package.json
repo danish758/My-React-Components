@@ -1,0 +1,31 @@
+{
+  "name": "react-files-uploader-with-preview",
+  "version": "0.0.8",
+  "description": "A react package for uploading and validating multiple files.",
+  "main": "MultiImageUpload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-file-upload",
+    "react-files-upload",
+    "react-images-upload",
+    "image-upload",
+    "file-upload"
+  ],
+  "author": "Danish Majeed <danishmajeed172@gmail.com>",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "react-files-manager": "^0.1.0"
+  }
+}

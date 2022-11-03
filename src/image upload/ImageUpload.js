@@ -15,10 +15,15 @@ const ImageUpload = () => {
     >
       <Box sx={{ width: "40vw", height: "40vh", border: "1px solid black" }}>
         <Button
-          variant="outlined"
+          variant="link"
           component="label"
           fullWidth
-          sx={{ height: "100%" }}
+          sx={{
+            height: "100%",
+            padding: "0px",
+            color: "orange",
+            fontSize: "24px",
+          }}
         >
           {file == "" && "Upload File"}
           <input

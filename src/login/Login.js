@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Button, TextField } from "@mui/material";
+import { Button, createTheme, TextField, ThemeProvider } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useLoginMutation } from "./service";
 import { useAddFAQMutation } from "../faqs/faqsService";
@@ -10,10 +10,23 @@ import { useDispatch } from "react-redux";
 import { closeSnackbar, setSnackbar } from "../snack.service";
 import { useNavigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { theme } from "../theme";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("This field is required"),
   password: Yup.string().required("This field is required"),
+});
+
+const Theme = createTheme({
+  components: {
+    // Name of the component ⚛️
+    MuiButtonBase: {
+      defaultProps: {
+        // The default props to change
+        disableRipple: true, // No more ripple, on the whole application 💣!
+      },
+    },
+  },
 });
 
 const Login = () => {
@@ -41,6 +54,7 @@ const Login = () => {
   return (
     <div>
       <h1>Login</h1>
+      {/* <ThemeProvider theme={theme}> */}
       <Formik
         initialValues={{
           email: "",
@@ -87,6 +101,7 @@ const Login = () => {
           </Form>
         )}
       </Formik>
+      {/* </ThemeProvider> */}
     </div>
   );
 };

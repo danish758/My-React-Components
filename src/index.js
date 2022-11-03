@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store, { persistore } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { ThemeProvider } from "@emotion/react";
+import { theme } from "./theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

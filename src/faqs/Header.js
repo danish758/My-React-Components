@@ -13,6 +13,8 @@ const Header = () => {
       ) : (
         <Button onClick={() => navigate("/add")}>Create User</Button>
       )}
+      <Button onClick={() => navigate("/single_image")}>Single Image</Button>
+      <Button onClick={() => navigate("/files_upload")}>Multi Images</Button>
     </div>
   );
 };

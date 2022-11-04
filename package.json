@@ -5,9 +5,11 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@material-ui/data-grid": "^4.0.0-alpha.37",
     "@mui/icons-material": "^5.10.9",
     "@mui/lab": "^5.0.0-alpha.106",
     "@mui/material": "^5.10.12",
+    "@mui/x-data-grid": "^5.17.10",
     "@progress/kendo-react-pdf": "^5.7.0",
     "@react-pdf/renderer": "^3.0.0",
     "@reduxjs/toolkit": "^1.8.6",

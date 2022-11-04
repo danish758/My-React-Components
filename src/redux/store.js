@@ -6,6 +6,14 @@ import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import persistStore from "redux-persist/es/persistStore";
 import snackService from "../snack.service";
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 const reducers = combineReducers({
   [loginService.reducerPath]: loginService.reducer,
   [faqsService.reducerPath]: faqsService.reducer,
@@ -16,18 +24,18 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  blacklist: ["snackService"],
+  whitelist: ["authSlice"],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
+console.log("redux", "store");
 const store = configureStore({
   reducer: persistedReducer,
-  // reducer: {
-  //   [loginService.reducerPath]: loginService.reducer,
-  //   [faqsService.reducerPath]: faqsService.reducer,
-  //   authSlice,
-  // },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(loginService.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 export default store;
 

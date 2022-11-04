@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const loc = useLocation();
-  console.log("navigate", loc);
   return (
     <div>
       {loc?.pathname === "/add" ? (

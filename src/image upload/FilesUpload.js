@@ -13,7 +13,16 @@ const MultiImageUpload = ({
 }) => {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState("");
-  const [previewsArray, setPreviewsArray] = useState([]);
+  const DefaultImgs = [];
+  defaultImages?.map((src) => {
+    DefaultImgs.push({
+      src: src,
+      typeError: "",
+      sizeError: "",
+      name: "",
+    });
+  });
+  const [previewsArray, setPreviewsArray] = useState(DefaultImgs);
   const ref = useRef();
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -49,9 +58,7 @@ const MultiImageUpload = ({
       );
       // setError(`Maximum ${maxFiles} files are allowed`);
       setFiles([...files, ...FILES].slice(0, maxFiles));
-      console.log("first", [...files, ...FILES].slice(0, maxFiles));
     } else {
-      console.log("else");
       setFiles([...files, ...FILES]);
       setError("");
     }
@@ -73,7 +80,7 @@ const MultiImageUpload = ({
         //
       });
 
-    setPreviewsArray(urlsArray?.concat(defaultImages));
+    setPreviewsArray([...previewsArray, ...urlsArray]);
     // return [...files, FILES];
     onChange(
       [...files, ...FILES].length > maxFiles
@@ -81,7 +88,7 @@ const MultiImageUpload = ({
         : [...files, ...FILES]
     );
   };
-
+  console.log("previewsArray", previewsArray);
   const handleClick = (e) => {
     ref.current.click();
   };
@@ -103,7 +110,6 @@ const MultiImageUpload = ({
       setError("");
     }
   };
-
   return (
     <div>
       <div
@@ -147,8 +153,8 @@ const MultiImageUpload = ({
           />
           <div style={{ display: "flex", justifyContent: "space-evenly" }}>
             {previewsArray.length > 0 &&
-              previewsArray.map((src) => (
-                <div>
+              previewsArray.map((src, index) => (
+                <div key={index}>
                   <div style={{ position: "relative" }}>
                     <img
                       src={cross}
@@ -178,8 +184,8 @@ const MultiImageUpload = ({
       </div>
       <div style={{ color: "red" }}>{error}</div>
       <div>
-        {files?.map((file) => (
-          <div>{file?.file?.name}</div>
+        {files?.map((file, ind) => (
+          <div key={ind}>{file?.file?.name}</div>
         ))}
       </div>
     </div>

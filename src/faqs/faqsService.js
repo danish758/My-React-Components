@@ -6,25 +6,35 @@ export const faqsService = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.mooner.com.sg/user_management",
     prepareHeaders: (headers, { getState }) => {
-      // console.log("getState", headers, getState());
+      console.log("redux", "reducer");
       const {
         authSlice: { token },
       } = getState();
       // console.log("token", token);
       headers.set("authorization", `Bearer ${token}`);
-      console.log("headers", headers);
       return headers;
     },
   }),
   endpoints: (builder) => ({
     addFAQ: builder.mutation({
-      query: (formdata) => ({
-        url: "admin_register_user/",
-        method: "POST",
-        body: formdata,
-      }),
-      //   console.log("data")
+      query: (formdata) => {
+        console.log("redux", "reducer action");
+        return {
+          url: "admin_register_user/",
+          method: "POST",
+          body: formdata,
+        };
+      },
+    }),
+    getSubAdmins: builder.mutation({
+      query: (page) => {
+        // console.log("redux", "reducer action");
+        return {
+          url: `sub_admins/?page=${page}`,
+          method: "GET",
+        };
+      },
     }),
   }),
 });
-export const { useAddFAQMutation } = faqsService;
+export const { useAddFAQMutation, useGetSubAdminsMutation } = faqsService;

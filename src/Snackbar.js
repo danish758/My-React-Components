@@ -12,9 +12,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function SnackBar() {
-  let snack = useSelector((state) =>
-    console.log("snackSliced", state.snackService?.status)
-  );
   let dispatch = useDispatch();
   let { message, severity, status } = useSelector(
     (state) => state.snackService

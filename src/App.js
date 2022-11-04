@@ -40,7 +40,7 @@ function App() {
                 <MultiImageUpload
                   maxSize={2}
                   accept="image/png"
-                  defaultImages={[]}
+                  defaultImages={defaultImages}
                   maxFiles={3}
                   onChange={checkFiles}
                 />

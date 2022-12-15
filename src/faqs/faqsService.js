@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const faqsService = createApi({
   reducerPath: "addfaqs",
-  //   tagTypes: ["items"],
+  tagTypes: ["sub_admins"],
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.mooner.com.sg/user_management",
     prepareHeaders: (headers, { getState }) => {
@@ -25,8 +25,9 @@ export const faqsService = createApi({
           body: formdata,
         };
       },
+      invalidatesTags: ["sub_admins"],
     }),
-    getSubAdmins: builder.mutation({
+    getSubAdmins: builder.query({
       query: (page) => {
         // console.log("redux", "reducer action");
         return {
@@ -34,7 +35,8 @@ export const faqsService = createApi({
           method: "GET",
         };
       },
+      providesTags: ["sub_admins"],
     }),
   }),
 });
-export const { useAddFAQMutation, useGetSubAdminsMutation } = faqsService;
+export const { useAddFAQMutation, useGetSubAdminsQuery } = faqsService;

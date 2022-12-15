@@ -6,15 +6,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Pagination } from "@mui/material";
+import { Pagination, Skeleton } from "@mui/material";
 import { Box } from "@mui/system";
-import TablePagination from "../pagination/TablePagination";
 
 export default function BasicTable({ DATA, isFetching }) {
   console.log("DATA", DATA);
   return (
     <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "20px",
+      }}
     >
       <Box>
         <TableContainer component={Paper}>
@@ -27,29 +30,43 @@ export default function BasicTable({ DATA, isFetching }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {DATA.map((row) =>
-                isFetching ? (
-                  "kkkk"
-                ) : (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell>{row.username}</TableCell>
-                    <TableCell>{row.email}</TableCell>
-                    <TableCell align="center">
+              {DATA.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell>
+                    {!isFetching ? (
+                      row.username
+                    ) : (
+                      <Skeleton animation="wave" width={"100%"} />
+                    )}
+                  </TableCell>
+
+                  <TableCell>
+                    {!isFetching ? (
+                      row.email
+                    ) : (
+                      <Skeleton animation="wave" width={"100%"} />
+                    )}
+                  </TableCell>
+
+                  <TableCell align="center">
+                    {!isFetching ? (
                       <div
                         style={{
                           width: "10px",
                           height: "10px",
-                          background: row?.is_active ? "green" : "red",
+                          background: row?.is_active ? "#4DAB75" : "red",
                           borderRadius: "20px",
                         }}
                       ></div>
-                    </TableCell>
-                  </TableRow>
-                )
-              )}
+                    ) : (
+                      <Skeleton animation="wave" width={"100%"} />
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

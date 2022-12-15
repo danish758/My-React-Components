@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { useState } from "react";
-import upload from "../assets/upload.png";
-import cross from "../assets/cross.png";
-import { setSnackbar } from "../snack.service";
+import upload from "../../assets/upload.png";
+import cross from "../../assets/cross.png";
+import { setSnackbar } from "../../snack.service";
 import { useDispatch } from "react-redux";
 const MultiImageUpload = ({
   maxSize,
@@ -27,6 +27,7 @@ const MultiImageUpload = ({
   const dispatch = useDispatch();
   const handleChange = (e) => {
     const Files = [e.target.files];
+    console.log("Files", Files);
     const FILES = [];
     Files.map((fileList, ind) => {
       const getArray = Object.values(fileList);
@@ -34,7 +35,7 @@ const MultiImageUpload = ({
         let typeError = "",
           sizeError = "";
 
-        if (file.type !== accept) {
+        if (accept.includes(file.type) === false) {
           typeError = `Invalid format`;
         }
         if (file.size / 1024 / 1024 > maxSize) {
@@ -60,14 +61,16 @@ const MultiImageUpload = ({
       setFiles([...files, ...FILES].slice(0, maxFiles));
     } else {
       setFiles([...files, ...FILES]);
-      setError("");
+      // setError("files");
     }
 
     //Setting Previews
+    // debugger;
     const previews =
       [...files, ...FILES].length > maxFiles
         ? [...files, ...FILES].slice(0, maxFiles)
         : [...files, ...FILES];
+    console.log("previews", previews);
     const urlsArray = [];
     previews?.length > 0 &&
       previews.map((file) => {
@@ -79,8 +82,16 @@ const MultiImageUpload = ({
         });
         //
       });
+    console.log("urlsArray", urlsArray);
+    if (urlsArray.length + defaultImages.length > maxFiles) {
+      let slicedUrls = urlsArray.slice(0, maxFiles - DefaultImgs.length);
+      console.log("slicedUrls", slicedUrls);
 
-    setPreviewsArray([...previewsArray, ...urlsArray]);
+      setPreviewsArray([...DefaultImgs, ...slicedUrls]);
+    } else {
+      setPreviewsArray([...DefaultImgs, ...urlsArray]);
+    }
+
     // return [...files, FILES];
     onChange(
       [...files, ...FILES].length > maxFiles
@@ -148,6 +159,7 @@ const MultiImageUpload = ({
             ref={ref}
             type="file"
             onChange={(e) => handleChange(e)}
+            // accept={accept}
             multiple
             hidden
           />
@@ -183,11 +195,11 @@ const MultiImageUpload = ({
         </div>
       </div>
       <div style={{ color: "red" }}>{error}</div>
-      <div>
+      {/* <div>
         {files?.map((file, ind) => (
           <div key={ind}>{file?.file?.name}</div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

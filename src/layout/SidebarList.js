@@ -10,6 +10,7 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 import { pages } from "./sidebarPages";
 import { ListItem } from "@mui/material";
 import styled from "@emotion/styled";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedItem } from "../redux/slices/selectedListItem";
@@ -51,13 +52,17 @@ export default function SidebarList() {
               selected={selectedIndex === index}
               onClick={() => handleListItemClick(item, index)}
             >
-              {/* <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon> */}
               <ListItemText primary={item.title} />
             </ListItemButton>
           </StyledListItem>
         ))}
+        <StyledListItem>
+          <ListItemButton onClick={() => navigate("/")}>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+          </ListItemButton>
+        </StyledListItem>
       </List>
     </Box>
   );

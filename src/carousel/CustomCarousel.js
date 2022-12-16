@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Container, paginationClasses } from "@mui/material";
+import { Container, paginationClasses, useMediaQuery } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
 import "./carousel.css";
@@ -44,8 +44,9 @@ const images = [
 
 function CustomCarousel() {
   // Sub Arrays
+  const isMobile = useMediaQuery("(max-width:600px)");
 
-  const size = 2;
+  const size = !isMobile ? 2 : 1;
   const [ImagesArray, setImagesArray] = useState([]);
 
   const [rerender, setrerender] = useState(false);
@@ -94,16 +95,6 @@ function CustomCarousel() {
     chunk(counter - 1);
   };
 
-  //   useEffect(() => {
-  //     setInterval(() => {
-  //       setCounter((prevCount) =>
-  //         prevCount < images.length - 1 ? prevCount + 1 : 0
-  //       );
-  //     }, 2000);
-  //   }, []);
-
-  // Animation
-
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <div>
@@ -112,7 +103,7 @@ function CustomCarousel() {
             <Box
               component="img"
               sx={{
-                pl: 2,
+                // pl: 2,
                 height: 255,
                 display: "block",
                 // maxWidth: 400,
@@ -141,7 +132,7 @@ function CustomCarousel() {
                 key={index}
                 style={{
                   marginLeft: "20px",
-                  width: "35px",
+                  width: !isMobile ? "35px" : "15px",
                   border: "1px solid gray",
                   //   background: "green",
                   textAlign: "center",
@@ -153,7 +144,11 @@ function CustomCarousel() {
             ) : (
               <h5
                 key={index}
-                style={{ marginLeft: "10px", width: "35px", cursor: "pointer" }}
+                style={{
+                  marginLeft: "10px",
+                  width: !isMobile ? "35px" : "15px",
+                  cursor: "pointer",
+                }}
                 onClick={() => {
                   setCounter(index);
                   chunk(index);

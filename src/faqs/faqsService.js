@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const faqsService = createApi({
   reducerPath: "addfaqs",
   tagTypes: ["sub_admins"],
+  keepUnusedDataFor: 300,
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.mooner.com.sg/user_management",
     prepareHeaders: (headers, { getState }) => {

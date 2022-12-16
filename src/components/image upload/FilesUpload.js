@@ -4,6 +4,7 @@ import upload from "../../assets/upload.png";
 import cross from "../../assets/cross.png";
 import { setSnackbar } from "../../snack.service";
 import { useDispatch } from "react-redux";
+import { useMediaQuery } from "@mui/material";
 const MultiImageUpload = ({
   maxSize,
   accept,
@@ -13,6 +14,8 @@ const MultiImageUpload = ({
 }) => {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState("");
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   const DefaultImgs = [];
   defaultImages?.map((src) => {
     DefaultImgs.push({
@@ -132,19 +135,19 @@ const MultiImageUpload = ({
       >
         <div
           style={{
-            width: "40vw",
-            minHeight: "40vh",
+            width: isMobile ? "100%" : "40vw",
+            minHeight: isMobile ? "35vh" : "40vh",
             // border: "1px dashed black",
             boxShadow: " 0 3px 10px rgb(0 0 0 / 0.2)",
-            padding: "30px",
+            padding: isMobile ? "10px" : "30px",
           }}
         >
           <div
             onClick={handleClick}
             style={{
-              width: "auto",
+              width: isMobile ? "100%" : "auto",
               height: "auto",
-              margin: "20px",
+              marginBottom: isMobile ? "20px" : "30px",
               border: "2px dashed gray",
               borderRadius: "10px",
               color: "orange",

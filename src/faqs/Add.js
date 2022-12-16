@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import TablePagination from "../components/pagination/TablePagination";
 import { LOADER } from "./loader/Loading";
+import Table2 from "./Table2";
 
 const Add = () => {
   const auth = useSelector((state) => console.log("state", state));
@@ -45,8 +46,8 @@ const Add = () => {
     }
   };
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <Box>
+    <>
+      <Box sx={{ overflowX: "auto" }}>
         <Box sx={{ textAlign: "right" }}>
           <LoadingButton
             loading={isLoading}
@@ -56,7 +57,7 @@ const Add = () => {
             Create Sub Admin
           </LoadingButton>
         </Box>
-        <Box>
+        <>
           {!fetchLoading ? (
             <>
               <BasicTable DATA={results} isFetching={isFetching} />
@@ -66,8 +67,15 @@ const Add = () => {
               <LOADER />
             </Box>
           )}
-        </Box>
-        <Box paddingTop={"20px"} sx={{ float: "right" }}>
+        </>
+        <Box
+          paddingTop={"20px"}
+          sx={{
+            float: { sm: "right" },
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
           <TablePagination
             page={page}
             setpage={setpage}
@@ -75,7 +83,7 @@ const Add = () => {
           />
         </Box>
       </Box>
-    </div>
+    </>
   );
 };
 

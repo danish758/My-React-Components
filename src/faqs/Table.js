@@ -12,66 +12,58 @@ import { Box } from "@mui/system";
 export default function BasicTable({ DATA, isFetching }) {
   console.log("DATA", DATA);
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        marginTop: "20px",
-      }}
-    >
-      <Box>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Status</TableCell>
+    <>
+      <Paper sx={{ overflowX: "auto" }}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {DATA.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell>
+                  {!isFetching ? (
+                    row.username
+                  ) : (
+                    <Skeleton animation="wave" width={"100%"} />
+                  )}
+                </TableCell>
+
+                <TableCell>
+                  {!isFetching ? (
+                    row.email
+                  ) : (
+                    <Skeleton animation="wave" width={"100%"} />
+                  )}
+                </TableCell>
+
+                <TableCell align="center">
+                  {!isFetching ? (
+                    <div
+                      style={{
+                        width: "10px",
+                        height: "10px",
+                        background: row?.is_active ? "#4DAB75" : "red",
+                        borderRadius: "20px",
+                      }}
+                    ></div>
+                  ) : (
+                    <Skeleton animation="wave" width={"100%"} />
+                  )}
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {DATA.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell>
-                    {!isFetching ? (
-                      row.username
-                    ) : (
-                      <Skeleton animation="wave" width={"100%"} />
-                    )}
-                  </TableCell>
-
-                  <TableCell>
-                    {!isFetching ? (
-                      row.email
-                    ) : (
-                      <Skeleton animation="wave" width={"100%"} />
-                    )}
-                  </TableCell>
-
-                  <TableCell align="center">
-                    {!isFetching ? (
-                      <div
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          background: row?.is_active ? "#4DAB75" : "red",
-                          borderRadius: "20px",
-                        }}
-                      ></div>
-                    ) : (
-                      <Skeleton animation="wave" width={"100%"} />
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-    </div>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    </>
   );
 }
 

@@ -65,7 +65,9 @@ export default function Search({}) {
 
   return (
     <CenderedBox width={"100%"} onClick={() => setShow("none")}>
-      <Box sx={{ width: "400px" }}>
+      <Box
+      // sx={{ width: "400px" }}
+      >
         <StyledRoot
           sx={{
             color: "primary.main",

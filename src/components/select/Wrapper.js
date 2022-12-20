@@ -4,6 +4,7 @@ import React from "react";
 import IconChange from "./IconChange";
 import MuiSelect from "./Placeholder";
 import StyledSelect from "./StyledSelect";
+import SelectAllFeature from "./SelectAllFeature";
 
 const Wrapper = () => {
   return (
@@ -19,6 +20,10 @@ const Wrapper = () => {
       <Box>
         <Typography variant="h6">Customize Styles</Typography>
         <StyledSelect />
+      </Box>
+      <Box>
+        <Typography variant="h6">Select All Feature</Typography>
+        <SelectAllFeature />
       </Box>
     </Stack>
   );

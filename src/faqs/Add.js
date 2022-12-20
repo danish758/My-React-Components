@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSnackbar } from "../snack.service";
@@ -14,6 +14,7 @@ import Table2 from "./Table2";
 const Add = () => {
   const auth = useSelector((state) => console.log("state", state));
   const [addFAQ, { isLoading }] = useAddFAQMutation();
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const [page, setpage] = useState(1);
   const {
@@ -24,7 +25,6 @@ const Add = () => {
   console.log("page", page);
   const { count, results = [], previous, next } = data;
   const { addfaqs = {} } = useSelector((state) => state);
-  console.log("isFetching", isFetching);
   const dispatch = useDispatch();
   const addFaq = async () => {
     // debugger;
@@ -47,7 +47,7 @@ const Add = () => {
   };
   return (
     <>
-      <Box sx={{ overflowX: "auto" }}>
+      <Box sx={{ overflowX: isMobile ? "auto" : "unset" }}>
         <Box sx={{ textAlign: "right" }}>
           <LoadingButton
             loading={isLoading}

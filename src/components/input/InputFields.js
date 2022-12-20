@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { TextField, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
+import { alpha, Stack } from "@mui/system";
 import React from "react";
 
 const StyledTextField = styled(TextField)(
@@ -15,20 +15,16 @@ const StyledTextField = styled(TextField)(
 const StyledTextField2 = styled(TextField)(
   ({ theme, background, borderColor }) => ({
     background: background,
-    borderRadius: "24px",
     "& .MuiOutlinedInput-root": {
-      borderRadius: "24px",
-    },
-    "& 	.Mui-focused": {
-      "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: "#283593 !important",
+      "& fieldset": {
+        borderColor: "#b71c1c",
       },
-    },
-    "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: background && `#b71c1c !important`,
-    },
-    "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: background && `#01579b !important`,
+      "&:hover fieldset": {
+        borderColor: "#01579b",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#283593",
+      },
     },
   })
 );
@@ -38,20 +34,40 @@ const StyledTextField3 = styled(TextField)(({ background }) => ({
   borderRadius: "3px",
   "& .MuiOutlinedInput-root": {
     borderRadius: "3px",
-  },
-  "& 	.Mui-focused": {
-    "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#9e9e9e !important",
-      boxShadow: "0 0 0 0.2rem #90caf9",
+    "&.Mui-focused fieldset": {
+      borderColor: "#90caf9 !important",
+      boxShadow: `${alpha("#90caf9", 0.25)} 0 0 0 0.2rem`,
+    },
+    "& fieldset": {
+      borderColor: background && `#9e9e9e !important`,
     },
   },
-  "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: background && `#9e9e9e !important`,
-  },
-  "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: background && `#9e9e9e !important`,
-  },
+
+  // "&:hover .MuiOutlinedInput-notchedOutline": {
+  //   borderColor: background && `#9e9e9e !important`,
+  // },
 }));
+
+const CssTextField = styled(TextField)({
+  // "& label.Mui-focused": {
+  //   color: "green",
+  // },
+  // '& .MuiInput-underline:after': {
+  //   borderBottomColor: 'green',
+  // },
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "24px",
+    "& fieldset": {
+      borderColor: "red",
+    },
+    "&:hover fieldset": {
+      borderColor: "yellow",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "green",
+    },
+  },
+});
 
 export const InputFields = () => {
   return (
@@ -109,6 +125,31 @@ export const InputFields = () => {
           }}
           placeholder="Notch customization"
         />
+        <div
+          style={{
+            background: "linear-gradient(45deg,purple, orange)",
+            display: "flex",
+            justifyContent: "center",
+            borderRadius: "24px",
+          }}
+        >
+          <TextField
+            variant="standard"
+            InputProps={{
+              disableUnderline: true,
+            }}
+            fullWidth
+            placeholder="Gradiant Border"
+            sx={{
+              background: "#F5F5F5",
+              margin: "2px 2px 2px 2px",
+              borderRadius: "24px",
+              padding: "5px 15px ",
+            }}
+          />
+        </div>
+        <CssTextField />
+        <CssTextField select />
       </Stack>
     </div>
   );

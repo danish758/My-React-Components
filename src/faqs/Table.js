@@ -6,15 +6,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Pagination, Skeleton } from "@mui/material";
+import { Pagination, Skeleton, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 
 export default function BasicTable({ DATA, isFetching }) {
   console.log("DATA", DATA);
+  const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <>
-      <Paper sx={{ overflowX: "auto" }}>
-        <Table aria-label="simple table">
+      <Paper sx={{ overflowX: isMobile ? "auto" : "unset" }}>
+        <Table aria-label="simple table" sx={{ minWidth: "500px" }}>
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>

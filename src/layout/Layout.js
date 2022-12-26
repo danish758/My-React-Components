@@ -15,6 +15,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { pages } from "./sidebarPages";
+import NestedList from "./NestedList";
 
 const DashboardLayout = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -53,10 +54,10 @@ const DashboardLayout = () => {
       </Box>
       <Drawer
         sx={{
-          width: "60%",
+          width: "80%",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: "60%",
+            width: { xs: "70%", sm: "30%" },
             boxSizing: "border-box",
           },
         }}
@@ -66,20 +67,9 @@ const DashboardLayout = () => {
         onClose={handleDrawerClose}
       >
         <Divider />
-        <List sx={{ mt: 3 }}>
-          {pages.map((page, index) => (
-            <ListItem key={page} disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  navigate(page.path);
-                  handleDrawerClose();
-                }}
-              >
-                <ListItemText primary={page.title} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <Box sx={{ width: "100%" }}>
+          <Sidebar />
+        </Box>
       </Drawer>
     </Box>
   );

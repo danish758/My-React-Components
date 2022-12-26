@@ -61,7 +61,7 @@ export default function SidebarList() {
     <Box
       sx={{
         width: "100%",
-        maxWidth: 360,
+        // maxWidth: 360,
         // bgcolor: "#9e9e9e"
       }}
     >
@@ -82,6 +82,7 @@ export default function SidebarList() {
               selectedIndex={selectedIndex}
               handleListItemClick={handleListItemClick}
               setSelectedIndex={setSelectedIndex}
+              title={item.title}
             />
           )
         )}

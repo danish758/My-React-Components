@@ -37,6 +37,7 @@ export default function NestedList({
   handleListItemClick,
   selectedIndex,
   setSelectedIndex,
+  title,
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -69,10 +70,7 @@ export default function NestedList({
     >
       <StyledListItem>
         <ListItemButton onClick={handleClick}>
-          {/* <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon> */}
-          <ListItemText primary="Inbox" />
+          <ListItemText primary={title} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
       </StyledListItem>

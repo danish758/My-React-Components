@@ -29,7 +29,7 @@ export default function Router() {
       path: "/",
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/" />, index: true },
+        // { element: <Navigate to="/" />, index: true },
         { path: "app", element: <DashBoardPage /> },
         { path: "users", element: <Add /> },
         { path: "files", element: <ImageTabs /> },

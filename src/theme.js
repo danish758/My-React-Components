@@ -9,25 +9,25 @@ export const theme = createTheme(Theme, {
     },
   },
   components: {
-    MuiButtonBase: {
-      defaultProps: {
-        disableRipple: true,
-        // disabled: true,
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          // Some CSS
-          borderRadius: "24px",
-          textTransform: "none",
-          // boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-          "&:hover": {
-            // boxShadow: "none",
-          },
-        },
-      },
-    },
+    // MuiButtonBase: {
+    //   defaultProps: {
+    //     disableRipple: true,
+    //     // disabled: true,
+    //   },
+    // },
+    // MuiButton: {
+    //   styleOverrides: {
+    //     root: {
+    //       // Some CSS
+    //       borderRadius: "24px",
+    //       textTransform: "none",
+    //       // boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+    //       "&:hover": {
+    //         // boxShadow: "none",
+    //       },
+    //     },
+    //   },
+    // },
     MuiTabs: {
       defaultProps: {
         selectionFollowsFocus: true,

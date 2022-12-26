@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
-import { Divider } from "@mui/material";
+import { Divider, FormControlLabel } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -17,6 +17,7 @@ const MenuProps = {
       width: 250,
     },
   },
+  variant: "menu",
 };
 
 const names = [
@@ -74,10 +75,16 @@ export default function SelectAllFeature() {
           MenuProps={MenuProps}
         >
           <MenuItem>
-            <Checkbox
-              checked={selectAll}
-              onChange={handleSelectAll}
-              inputProps={{ "aria-label": "controlled" }}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={selectAll}
+                  onChange={handleSelectAll}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              }
+              label="Select All"
+              labelPlacement="end"
             />
           </MenuItem>
           <Divider />

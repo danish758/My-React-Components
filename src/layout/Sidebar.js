@@ -10,8 +10,6 @@ import SidebarList from "./SidebarList";
 const NAV_WIDTH = 280;
 
 export const Sidebar = () => {
-  const { pathname } = useLocation();
-
   return (
     <Box
       component="nav"

@@ -1,8 +1,11 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import CustomCarousel from "./carousel/CustomCarousel";
 import WrapperCheckbox from "./components/checkbox/WrapperCheckbox";
+import FormWrapper from "./components/form/Wrapper";
 import ImageTabs from "./components/image upload/ImageTabs";
 import { InputFields } from "./components/input/InputFields";
+import Child1 from "./components/nested/Child1";
+import Child2 from "./components/nested/Child2";
 import Search from "./components/search/Search";
 import MuiSelect from "./components/select/Placeholder";
 import Wrapper from "./components/select/Wrapper";
@@ -16,17 +19,17 @@ import Login from "./login/Login";
 
 export default function Router() {
   const routes = useRoutes([
+    // {
+    //   path: "/",
+    //   exact: true,
+    //   element: <Login />,
+    //   index: true,
+    // },
     {
       path: "/",
-      exact: true,
-      element: <Login />,
-      index: true,
-    },
-    {
-      path: "/dashboard",
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
+        { element: <Navigate to="/" />, index: true },
         { path: "app", element: <DashBoardPage /> },
         { path: "users", element: <Add /> },
         { path: "files", element: <ImageTabs /> },
@@ -36,6 +39,9 @@ export default function Router() {
         { path: "select", element: <Wrapper /> },
         { path: "checkbox", element: <WrapperCheckbox /> },
         { path: "switch", element: <WrapperSwitch /> },
+        { path: "form", element: <FormWrapper /> },
+        { path: "child1", element: <Child1 /> },
+        { path: "child2", element: <Child2 /> },
       ],
     },
 

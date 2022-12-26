@@ -11,9 +11,10 @@ import { pages } from "./sidebarPages";
 import { ListItem } from "@mui/material";
 import styled from "@emotion/styled";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedItem } from "../redux/slices/selectedListItem";
+import NestedList from "./NestedList";
 
 const StyledListItem = styled(ListItem)({
   "& .MuiTypography-root": {
@@ -33,36 +34,64 @@ const StyledListItem = styled(ListItem)({
 export default function SidebarList() {
   const { selectedItemSlice: { selectedIndex: SelectedIndex = 0 } = {} } =
     useSelector((state) => state);
-  // console.log("state", SelectedIndex);
   const [selectedIndex, setSelectedIndex] = React.useState(SelectedIndex);
+  console.log("selectedIndex", SelectedIndex);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleListItemClick = (item, index) => {
-    setSelectedIndex(index);
-    dispatch(setSelectedItem(index));
+  const { pathname } = useLocation();
+  console.log("pathname", pathname);
+  const handleListItemClick = (item) => {
+    setSelectedIndex(item.path);
+    dispatch(setSelectedItem(item?.path));
     navigate(item.path);
   };
 
+  React.useEffect(() => {
+    pages.map((page) => {
+      if (page.path == pathname) {
+        setSelectedIndex(page.path);
+        dispatch(setSelectedItem(page.path));
+      } else {
+        console.log("noooo");
+      }
+    });
+  }, [pathname]);
+
   return (
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: 360,
+        // bgcolor: "#9e9e9e"
+      }}
+    >
       <List component="nav" aria-label="main mailbox folders">
-        {pages.map((item, index) => (
-          <StyledListItem key={index}>
-            <ListItemButton
-              selected={selectedIndex === index}
-              onClick={() => handleListItemClick(item, index)}
-            >
-              <ListItemText primary={item.title} />
-            </ListItemButton>
-          </StyledListItem>
-        ))}
-        <StyledListItem>
+        {pages.map((item, index) =>
+          !item?.nested ? (
+            <StyledListItem key={index}>
+              <ListItemButton
+                selected={selectedIndex === item.path}
+                onClick={() => handleListItemClick(item, index)}
+              >
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </StyledListItem>
+          ) : (
+            <NestedList
+              pages={item.subPages}
+              selectedIndex={selectedIndex}
+              handleListItemClick={handleListItemClick}
+              setSelectedIndex={setSelectedIndex}
+            />
+          )
+        )}
+        {/* <StyledListItem>
           <ListItemButton onClick={() => navigate("/")}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
           </ListItemButton>
-        </StyledListItem>
+        </StyledListItem> */}
       </List>
     </Box>
   );

@@ -1,39 +1,52 @@
 export const pages = [
   {
     title: "Dashboard",
-    path: "/dashboard/app",
+    path: "/app",
     // icon: icon("ic_analytics"),
   },
   {
     title: "Users",
-    path: "/dashboard/users",
+    path: "/users",
   },
   {
     title: "Images Upload",
-    path: "/dashboard/files",
+    path: "/files",
   },
   {
     title: "Carousel",
-    path: "/dashboard/carousel",
+    path: "/carousel",
   },
   {
     title: "Search Field",
-    path: "/dashboard/search",
+    path: "/search",
   },
   {
     title: "Text Field",
-    path: "/dashboard/input",
+    path: "/input",
   },
   {
     title: "Select",
-    path: "/dashboard/select",
+    path: "/select",
   },
   {
     title: "Checkbox",
-    path: "/dashboard/checkbox",
+    path: "/checkbox",
   },
   {
     title: "Switch",
-    path: "/dashboard/switch",
+    path: "/switch",
+  },
+  {
+    title: "Form",
+    path: "/form",
+  },
+  {
+    title: "Parent",
+    // path: "/form",
+    nested: true,
+    subPages: [
+      { title: "Child 1", path: "/child1" },
+      { title: "Child 2", path: "/child2" },
+    ],
   },
 ];

@@ -12,6 +12,7 @@ import CustomCarousel from "./carousel/CustomCarousel";
 import MultiImageUpload from "./components/image upload/FilesUpload";
 import Search from "./components/search/Search";
 import Router from "./routes";
+import ScrollToTop from "./common/ScrollToTop";
 function App() {
   const defaultImages = [
     // "https://mooner-staging-media.s3.amazonaws.com/banners_image/profile5.png",
@@ -26,6 +27,7 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <SnackBar />
+          <ScrollToTop />
           <Router />
           {/* <Header />
           <Routes>

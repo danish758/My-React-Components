@@ -20,7 +20,6 @@ const DashboardLayout = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
-  console.log("open", open);
 
   const handleDrawerOpen = () => {
     setOpen(true);

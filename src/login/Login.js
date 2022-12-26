@@ -54,7 +54,6 @@ const Login = () => {
   return (
     <div>
       <h1>Login</h1>
-      {/* <ThemeProvider theme={theme}> */}
       <Formik
         initialValues={{
           email: "",
@@ -101,7 +100,6 @@ const Login = () => {
           </Form>
         )}
       </Formik>
-      {/* </ThemeProvider> */}
     </div>
   );
 };

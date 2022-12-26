@@ -152,10 +152,10 @@ const MultiImageUpload = ({
               borderRadius: "10px",
               color: "orange",
               cursor: "pointer",
+              paddingBottom: "15px",
             }}
           >
             <h3>Upload Files</h3>
-            {/* <h5>Click to Upload</h5> */}
             <img src={upload} width="100px" height="100px" />
           </div>
           <input

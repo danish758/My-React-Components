@@ -7,6 +7,9 @@ export const theme = createTheme(Theme, {
     primary: {
       main: "#ff9800",
     },
+    background: {
+      default: "#F0F3F8",
+    },
   },
   components: {
     // MuiButtonBase: {
@@ -99,6 +102,19 @@ export const theme = createTheme(Theme, {
       [Theme.breakpoints.down("sm")]: {
         fontSize: "25px", // 20px
       },
+    },
+    h6: {
+      fontSize: "14px",
+      lineHeight: "19px",
+      fontWeight: "700",
+      // [Theme.breakpoints.down("sm")]: {
+      //   fontSize: "25px", // 20px
+      // },
+    },
+    h5: {
+      fontSize: "13px",
+      lineHeight: "19px",
+      // fontWeight: "700",
     },
   },
 });

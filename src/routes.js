@@ -19,12 +19,12 @@ import Login from "./login/Login";
 
 export default function Router() {
   const routes = useRoutes([
-    // {
-    //   path: "/",
-    //   exact: true,
-    //   element: <Login />,
-    //   index: true,
-    // },
+    {
+      path: "/login",
+      exact: true,
+      element: <Login />,
+      index: true,
+    },
     {
       path: "/",
       element: <DashboardLayout />,

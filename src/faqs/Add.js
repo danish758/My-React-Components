@@ -10,6 +10,7 @@ import { useState } from "react";
 import TablePagination from "../components/pagination/TablePagination";
 import { LOADER } from "./loader/Loading";
 import Table2 from "./Table2";
+import MyTable from "./MyTable";
 
 const Add = () => {
   const auth = useSelector((state) => console.log("state", state));
@@ -46,9 +47,8 @@ const Add = () => {
     }
   };
   return (
-    <>
-      <Box sx={{ overflowX: isMobile ? "auto" : "unset" }}>
-        <Box sx={{ textAlign: "right" }}>
+    <Box sx={{ overflowX: isMobile ? "auto" : "unset" }}>
+      {/* <Box sx={{ textAlign: "right" }}>
           <LoadingButton
             loading={isLoading}
             variant="contained"
@@ -56,34 +56,33 @@ const Add = () => {
           >
             Create Sub Admin
           </LoadingButton>
-        </Box>
-        <>
-          {!fetchLoading ? (
-            <>
-              <BasicTable DATA={results} isFetching={isFetching} />
-            </>
-          ) : (
-            <Box sx={{ mt: 2 }}>
-              <LOADER />
-            </Box>
-          )}
-        </>
-        <Box
-          paddingTop={"20px"}
-          sx={{
-            float: { sm: "right" },
-            justifyContent: "center",
-            display: "flex",
-          }}
-        >
-          <TablePagination
-            page={page}
-            setpage={setpage}
-            count={Math.ceil(count / 10)}
-          />
-        </Box>
+        </Box> */}
+      <>
+        {!fetchLoading ? (
+          <>
+            <MyTable DATA={results} isFetching={isFetching} />
+          </>
+        ) : (
+          <Box sx={{ mt: 2 }}>
+            <LOADER />
+          </Box>
+        )}
+      </>
+      <Box
+        paddingTop={"20px"}
+        sx={{
+          float: { sm: "right" },
+          justifyContent: "center",
+          display: "flex",
+        }}
+      >
+        <TablePagination
+          page={page}
+          setpage={setpage}
+          count={Math.ceil(count / 10)}
+        />
       </Box>
-    </>
+    </Box>
   );
 };
 

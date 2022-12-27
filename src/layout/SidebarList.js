@@ -65,7 +65,11 @@ export default function SidebarList() {
         // bgcolor: "#9e9e9e"
       }}
     >
-      <List component="nav" aria-label="main mailbox folders">
+      <List
+        component="nav"
+        aria-label="main mailbox folders"
+        sx={{ height: "100vh", overflowY: "auto" }}
+      >
         {pages.map((item, index) =>
           !item?.nested ? (
             <StyledListItem key={index}>

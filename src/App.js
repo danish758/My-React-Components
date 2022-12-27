@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./login/Login";
 import SnackBar from "./Snackbar";
 import Add from "./faqs/Add";
-import { Button, ThemeProvider } from "@mui/material";
+import { Button, CssBaseline, ThemeProvider } from "@mui/material";
 import Header from "./faqs/Header";
 import { theme } from "./theme";
 import ImageTabs from "./components/image upload/ImageTabs";
@@ -26,6 +26,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <ThemeProvider theme={theme}>
+          <CssBaseline />
           <SnackBar />
           <ScrollToTop />
           <Router />

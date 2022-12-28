@@ -116,5 +116,10 @@ export const theme = createTheme(Theme, {
       lineHeight: "19px",
       // fontWeight: "700",
     },
+    h4: {
+      fontSize: "30px",
+      lineHeight: "25px",
+      fontWeight: "700",
+    },
   },
 });

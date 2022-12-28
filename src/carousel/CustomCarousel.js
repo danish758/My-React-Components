@@ -4,7 +4,15 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Container, paginationClasses, useMediaQuery } from "@mui/material";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import {
+  Container,
+  IconButton,
+  paginationClasses,
+  Slide,
+  useMediaQuery,
+} from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
 import "./carousel.css";
@@ -30,26 +38,14 @@ const images = [
     imgPath:
       "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
   },
-  {
-    label: "Bali, Indonesia",
-    imgPath:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
-  },
-  {
-    label: "Goč, Serbia",
-    imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
-  },
 ];
 
 function CustomCarousel() {
   // Sub Arrays
   const isMobile = useMediaQuery("(max-width:600px)");
-
-  const size = !isMobile ? 2 : 1;
-  const [ImagesArray, setImagesArray] = useState([]);
-
-  const [rerender, setrerender] = useState(false);
+  const size = !isMobile ? 1 : 1;
+  const [ImagesArray, setImagesArray] = useState([images.slice(0, size)]);
+  const [direction, setdirection] = useState("left");
 
   const chunk = (begin) => {
     const chunkedArray = [];
@@ -83,49 +79,70 @@ function CustomCarousel() {
   //////
   const [counter, setCounter] = React.useState(0);
   const theme = useTheme();
-
+  const containerRef = React.useRef(null);
   const handleNext = (counter) => {
     // if (counter < pagination.length - 1) {
+    setdirection("left");
     setCounter((prevCount) => prevCount + 1);
     chunk(counter + 1);
     // }
   };
   const handleBack = (counter) => {
+    setdirection("right");
     setCounter((prevCount) => prevCount - 1);
     chunk(counter - 1);
   };
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4 }} ref={containerRef}>
       <div>
-        <Box sx={{ display: "flex" }}>
-          {ImagesArray?.map((image, index) => (
-            <Box
-              component="img"
-              sx={{
-                // pl: 2,
-                height: 255,
-                display: "block",
-                // maxWidth: 400,
-                overflow: "hidden",
-                width: `${100 / size}%`,
-              }}
-              src={image?.imgPath}
-              alt={image?.label}
-            />
+        <Box sx={{ display: "flex", overflow: "hidden" }}>
+          {images?.map((image, index) => (
+            <Slide
+              direction={direction}
+              in={
+                ImagesArray.find((img) => img.imgPath == image.imgPath)
+                  ? true
+                  : false
+              }
+              timeout={1000}
+              container={containerRef.current}
+              unmountOnExit
+              mountOnEnter
+            >
+              <Box
+                component="img"
+                sx={{
+                  // pl: 2,
+                  height: isMobile ? 300 : 500,
+                  display: ImagesArray.find(
+                    (img) => img.imgPath == image.imgPath
+                  )
+                    ? "block"
+                    : "none",
+                  // maxWidth: 400,
+                  overflow: "hidden",
+                  width: `${100 / size}%`,
+                }}
+                src={image?.imgPath}
+                alt={image?.label}
+              />
+            </Slide>
           ))}
         </Box>
       </div>
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Button
+        <IconButton
           size="small"
           onClick={() => handleBack(counter)}
           disabled={counter === 0}
         >
-          Back
-        </Button>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <KeyboardArrowLeft />
+        </IconButton>
+        <div
+          style={{ display: "flex", justifyContent: "space-between", gap: 1 }}
+        >
           {pagination.map((item, index) =>
             index === counter ? (
               <h3
@@ -159,13 +176,13 @@ function CustomCarousel() {
             )
           )}
         </div>
-        <Button
+        <IconButton
           size="small"
           onClick={() => handleNext(counter)}
           disabled={counter === pagination.length - 1}
         >
-          Next
-        </Button>
+          <KeyboardArrowRight />
+        </IconButton>
       </div>
     </Container>
   );

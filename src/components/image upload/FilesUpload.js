@@ -5,6 +5,8 @@ import cross from "../../assets/cross.png";
 import { setSnackbar } from "../../snack.service";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "@mui/material";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+
 const MultiImageUpload = ({
   maxSize,
   accept,
@@ -156,7 +158,7 @@ const MultiImageUpload = ({
             }}
           >
             <h3>Upload Files</h3>
-            <img src={upload} width="100px" height="100px" />
+            <UploadFileIcon sx={{ fontSize: 100 }} />
           </div>
           <input
             ref={ref}

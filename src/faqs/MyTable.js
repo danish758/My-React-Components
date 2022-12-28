@@ -14,9 +14,12 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import TableSkeleton from "../common/TableSkeleton";
 
 export default function MyTable({ DATA, isFetching }) {
   console.log("DATA", DATA);
+  console.log("isFetching", isFetching);
+
   const isMobile = useMediaQuery("(max-width:600px)");
   const COLUMNS_COUNT = 3;
   return (
@@ -40,69 +43,59 @@ export default function MyTable({ DATA, isFetching }) {
             <Typography variant="h6">Status</Typography>
           </Stack>
         </>
-        <>
-          {DATA.map((row) => (
-            <Stack
-              direction={"row"}
-              sx={{
-                width: "100%",
-                //   justifyContent: "space-between",
-                alignItems: "center",
-                my: 2,
-                px: 2,
-                py: 1,
-                background: "#fff",
-                borderRadius: "24px",
-              }}
-              // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    width: `calc(100% / ${COLUMNS_COUNT})`,
-                    wordBreak: "break-all",
-                    textAlign: "start",
-                  }}
-                >
-                  {isFetching ? (
-                    <Skeleton animation="wave" sx={{ width: "95%" }} />
-                  ) : (
-                    row.username
-                  )}
-                </Typography>
-              </>
+        {!isFetching ? (
+          <>
+            {DATA.map((row) => (
+              <Stack
+                direction={"row"}
+                sx={{
+                  width: "100%",
+                  //   justifyContent: "space-between",
+                  alignItems: "center",
+                  my: 2,
+                  px: 2,
+                  py: 1,
+                  background: "#fff",
+                  borderRadius: "24px",
+                }}
+                // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      width: `calc(100% / ${COLUMNS_COUNT})`,
+                      wordBreak: "break-all",
+                      textAlign: "start",
+                    }}
+                  >
+                    {row.username}
+                  </Typography>
+                </>
 
-              <>
-                <Typography
-                  sx={{
-                    width: `calc(100% / ${COLUMNS_COUNT})`,
-                    wordBreak: "break-all",
-                    textAlign: "center",
-                  }}
-                  variant="h5"
-                >
-                  {isFetching ? (
-                    <Skeleton animation="wave" sx={{ width: "95%" }} />
-                  ) : (
-                    row.email
-                  )}
-                </Typography>
-              </>
+                <>
+                  <Typography
+                    sx={{
+                      width: `calc(100% / ${COLUMNS_COUNT})`,
+                      wordBreak: "break-all",
+                      textAlign: "center",
+                    }}
+                    variant="h5"
+                  >
+                    {row.email}
+                  </Typography>
+                </>
 
-              <>
-                <Typography
-                  sx={{
-                    width: `calc(100% / ${COLUMNS_COUNT})`,
-                    wordBreak: "break-all",
-                    display: "flex",
-                    justifyContent: "end",
-                  }}
-                  variant="h5"
-                >
-                  {isFetching ? (
-                    <Skeleton animation="wave" sx={{ width: "95%" }} />
-                  ) : (
+                <>
+                  <Typography
+                    sx={{
+                      width: `calc(100% / ${COLUMNS_COUNT})`,
+                      wordBreak: "break-all",
+                      display: "flex",
+                      justifyContent: "end",
+                    }}
+                    variant="h5"
+                  >
                     <Typography
                       sx={{
                         width: `60px`,
@@ -117,12 +110,14 @@ export default function MyTable({ DATA, isFetching }) {
                     >
                       {row?.is_active ? "active" : "InActive"}
                     </Typography>
-                  )}
-                </Typography>
-              </>
-            </Stack>
-          ))}
-        </>
+                  </Typography>
+                </>
+              </Stack>
+            ))}
+          </>
+        ) : (
+          <TableSkeleton COLUMNS_COUNT={3} />
+        )}
       </Box>
     </Box>
   );

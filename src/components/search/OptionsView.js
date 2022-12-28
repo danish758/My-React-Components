@@ -20,7 +20,16 @@ export default function OptionsView({
   return (
     <Stack direction="row" spacing={2}>
       {show != "none" && (
-        <Paper sx={{ width: "100%", display: show }}>
+        <Paper
+          sx={{
+            width: "100%",
+            display: show,
+            background: "#F0F3F8",
+            boxShadow: "0 2px 12px 0 rgb(0 0 0 / 10%)",
+            maxHeight: "200px",
+            overflow: "auto",
+          }}
+        >
           <MenuList onClick={(e) => e.stopPropagation()}>
             {!fetching && options.length != 0 ? (
               options.map((option) => (

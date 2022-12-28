@@ -58,16 +58,9 @@ const Add = () => {
           </LoadingButton>
         </Box> */}
       <>
-        {!fetchLoading ? (
-          <>
-            <MyTable DATA={results} isFetching={isFetching} />
-          </>
-        ) : (
-          <Box sx={{ mt: 2 }}>
-            <LOADER />
-          </Box>
-        )}
+        <MyTable DATA={results} isFetching={isFetching} />
       </>
+
       <Box
         paddingTop={"20px"}
         sx={{

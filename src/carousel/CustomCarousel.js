@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import "./carousel.css";
 import { green } from "@mui/material/colors";
+import SwipeableViews from "react-swipeable-views";
 const images = [
   {
     label: "San Francisco – Oakland Bay Bridge, United States",
@@ -120,7 +121,6 @@ function CustomCarousel() {
                   )
                     ? "block"
                     : "none",
-                  // maxWidth: 400,
                   overflow: "hidden",
                   width: `${100 / size}%`,
                 }}

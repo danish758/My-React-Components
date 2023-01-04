@@ -127,7 +127,7 @@ const MultiImageUpload = ({
     }
   };
   return (
-    <div>
+    <div style={{ marginBottom: "20px" }}>
       <div
         style={{
           marginTop: "20vh",
@@ -168,7 +168,15 @@ const MultiImageUpload = ({
             multiple
             hidden
           />
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "20px",
+              overflow: "auto",
+              paddingTop: "20px",
+              justifyContent: "center",
+            }}
+          >
             {previewsArray.length > 0 &&
               previewsArray.map((src, index) => (
                 <div key={index}>

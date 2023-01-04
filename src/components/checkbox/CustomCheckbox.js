@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import { pink } from "@mui/material/colors";
 import { Box, Stack } from "@mui/system";
 import { Typography } from "@mui/material";
+import { ReactComponent as Checked } from "../../assets/checked.svg";
+import { ReactComponent as Unchecked } from "../../assets/unchecked.svg";
 
 const StyledCheckbox = styled(Checkbox)(({ theme, size, checkedColor }) => ({
   color: "red",
@@ -24,6 +26,21 @@ export default function CustomCheckbox() {
       <Box>
         <Typography variant="h6">Color and Size</Typography>
         <StyledCheckbox size="50px" defaultChecked checkedColor="#00bfa5" />
+      </Box>
+      <Box>
+        <Typography variant="h6">Custom Icons</Typography>
+        <Checkbox
+          sx={{
+            "&:hover": { bgcolor: "transparent" },
+          }}
+          defaultChecked
+          size="50px"
+          disableRipple
+          color="default"
+          checkedIcon={<Checked style={{ height: "50px", width: "50px" }} />}
+          icon={<Unchecked style={{ height: "50px", width: "50px" }} />}
+          inputProps={{ "aria-label": "Checkbox demo" }}
+        />
       </Box>
     </Stack>
   );

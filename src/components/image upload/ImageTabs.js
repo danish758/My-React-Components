@@ -57,7 +57,7 @@ export default function ImageTabs() {
               maxSize={2}
               accept={["image/jpeg", "image/jpg", "image/png"]}
               defaultImages={defaultImages}
-              maxFiles={3}
+              maxFiles={7}
               onChange={checkFiles}
             />
           </TabPanel>

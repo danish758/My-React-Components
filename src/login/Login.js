@@ -44,7 +44,7 @@ const Login = () => {
       dispatch(
         setSnackbar({ message: resp?.data?.Response, severity: "success" })
       );
-      navigate("/dashboard");
+      navigate("/app");
     } else {
       dispatch(
         setSnackbar({ message: resp?.data?.Response, severity: "error" })

@@ -16,11 +16,14 @@ import { Sidebar } from "./Sidebar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { pages } from "./sidebarPages";
 import NestedList from "./NestedList";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const DashboardLayout = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const { token } = useSelector((state) => state.authSlice);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -30,9 +33,9 @@ const DashboardLayout = () => {
   };
 
   return (
-    <Box sx={{ display: !isMobile ? "flex" : "block", mt: { sm: 4 } }}>
+    <Box sx={{ display: !isMobile ? "flex" : "block" }}>
       {!isMobile ? (
-        <Box sx={{ width: "280px" }}>
+        <Box sx={{ minWidth: "280px" }}>
           <Sidebar />
         </Box>
       ) : (
@@ -57,7 +60,7 @@ const DashboardLayout = () => {
           width: "80%",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: { xs: "70%", sm: "30%" },
+            width: 280,
             boxSizing: "border-box",
           },
         }}

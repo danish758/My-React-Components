@@ -48,13 +48,20 @@ export default function SelectAllFeature() {
     }
   };
   const handleChange = (event) => {
-    console.log("value", event.target.value);
+    // console.log("value", event.target.value.length === names.length);
+    const allSelected = event.target.value.length === names.length;
+    if (allSelected) {
+      setSelectAll(true);
+    } else {
+      setSelectAll(false);
+    }
     const {
       target: { value },
     } = event;
     setPersonName(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+      // typeof value === "string" ? value.split(",") :
+      value
     );
   };
   console.log("personName", personName);

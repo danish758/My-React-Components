@@ -16,6 +16,7 @@ import { ListItem } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { setSelectedItem } from "../redux/slices/selectedListItem";
 import { useDispatch } from "react-redux";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const StyledListItem = styled(ListItem)({
   "& .MuiTypography-root": {
@@ -26,8 +27,8 @@ const StyledListItem = styled(ListItem)({
     color: "#616161",
   },
   "& .Mui-selected": {
-    background: "#e1f5fe !important",
-    color: "rgba(59,130,246,.5) !important",
+    background: "#64b5f6 !important",
+    color: "#0d47a1 !important",
     fontWeight: "900 !important",
   },
 });
@@ -48,13 +49,11 @@ export default function NestedList({
   const dispatch = useDispatch();
   React.useEffect(() => {
     pages.map((page) => {
-      console.log("page.path", page.path);
-      console.log("pathname", pathname);
       if (page.path == pathname) {
         setSelectedIndex(page.path);
         dispatch(setSelectedItem(page.path));
       } else {
-        console.log("noooo child");
+        // console.log("noooo child");
       }
     });
   }, [pathname]);
@@ -71,7 +70,11 @@ export default function NestedList({
       <StyledListItem>
         <ListItemButton onClick={handleClick}>
           <ListItemText primary={title} />
-          {open ? <ExpandLess /> : <ExpandMore />}
+          {open ? (
+            <ExpandLess color="primary" />
+          ) : (
+            <NavigateNextIcon color="primary" />
+          )}
         </ListItemButton>
       </StyledListItem>
 

@@ -7,8 +7,9 @@ import { Button, IconButton, useMediaQuery } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Stack } from "@mui/system";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Form, Formik } from "formik";
+import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
+import ModalForValues from "./ModalForValues";
 
 const StyledTextField = styled(TextField)(
   ({ theme, background, borderColor, borderRadius }) => ({
@@ -24,107 +25,164 @@ const StyledTextField = styled(TextField)(
     },
   })
 );
+const StyledButton = styled(Button)(
+  ({ theme, background, borderColor, borderRadius }) => ({
+    boxShadow: "none",
+    "&:hover": {
+      backgroundColor: "#512da8",
+      boxShadow: "none",
+    },
+  })
+);
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("This field is required"),
-  password: Yup.string().required("This field is required"),
+  // email: Yup.string().email("Invalid email").required("This field is required"),
+  friends: Yup.array().of(
+    Yup.object().shape({
+      name: Yup.string().required("Name required"),
+    })
+  ),
 });
 
 export default function FormWrapper() {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const [reRender, setReRender] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [formValues, setFormValues] = useState([]);
 
-  const [inputs, setInputs] = useState([{ name: "" }]);
-
-  const addNewField = () => {
-    setInputs([...inputs, { name: "" }]);
+  const handleSubmit = async (values) => {
+    setReRender(!reRender);
+    console.log("values", values);
+    setOpenModal(true);
+    setFormValues(values);
+    // alert(JSON.stringify(values));
   };
-  const RemoveField = (index) => {
-    const fields = [...inputs];
-    fields.splice(index, 1);
-    setInputs(fields);
-  };
-  console.log("inputs", inputs);
-  const HandleChange = (e, i) => {
-    let formValues = [...inputs];
-    formValues[i][e.target.name] = e.target.value;
-    setInputs(formValues);
-  };
-
-  const handleSubmit = async (values) => {};
 
   return (
     <Stack spacing={2}>
       <Formik
         initialValues={{
-          name: [],
+          friends: [
+            {
+              name: "",
+            },
+          ],
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, values, handleChange }) => (
+        {({ values, handleChange, handleBlur, touched, errors }) => (
           <Form>
-            {inputs.map((input, index) => (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  height: "50px",
-                  width: !isMobile ? "400px" : "300px",
-                  mt: 2,
-                }}
-              >
-                <Box sx={{ width: "300px", height: "100%" }}>
-                  <Box sx={{ height: "100%", width: "100%" }}>
-                    <StyledTextField
-                      key={index}
-                      id="filled-basic"
-                      variant="standard"
-                      name={`name`}
-                      value={input.name}
-                      borderRadius="3px"
-                      // background="#bdbdbd"
-                      borderColor="#9e9e9e"
-                      InputProps={{
-                        disableUnderline: true,
-                      }}
-                      placeholder="Enter text here.."
-                      onFocus={() => console.log("first")}
-                      onChange={(e) => HandleChange(e, index)}
-                    />
+            <FieldArray name="friends">
+              {({ insert, remove, push }) => (
+                <div>
+                  {values.friends.length > 0 &&
+                    values.friends.map((friend, index) => (
+                      <>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 2,
+                            height: "50px",
+                            width: !isMobile ? "400px" : "300px",
+                            mt: 2,
+                          }}
+                        >
+                          <Box sx={{ width: "300px", height: "100%" }}>
+                            <Box sx={{ height: "100%", width: "100%" }}>
+                              <StyledTextField
+                                key={index}
+                                id="filled-basic"
+                                variant="standard"
+                                name={`friends.${index}.name`}
+                                value={values.friends[index]?.name}
+                                onChange={handleChange}
+                                borderRadius="3px"
+                                borderColor={
+                                  touched.friends &&
+                                  touched.friends[index]?.name &&
+                                  errors.friends &&
+                                  errors.friends[index]?.name
+                                    ? "red"
+                                    : "#9e9e9e"
+                                }
+                                InputProps={{
+                                  disableUnderline: true,
+                                }}
+                                placeholder="Enter text here.."
+                                onBlur={handleBlur}
+                              />
+                            </Box>
+                          </Box>
+
+                          <Box sx={{ height: "100%" }}>
+                            <Button
+                              variant="outlined"
+                              startIcon={<RemoveIcon />}
+                              sx={{ height: "100%" }}
+                              onClick={() => remove(index)}
+                            >
+                              Rem
+                            </Button>
+                          </Box>
+                        </Box>
+                        <ErrorMessage
+                          name={`friends.${index}.name`}
+                          component="div"
+                          style={{ textAlign: "justify", color: "red" }}
+                        />
+                      </>
+                    ))}
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 2,
+                      height: "50px",
+                      my: 1,
+                    }}
+                  >
+                    <Box sx={{ height: "100%" }}>
+                      <Button
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        sx={{ height: "100%", width: "300px" }}
+                        onClick={() => push({ name: "" })}
+                      >
+                        Add
+                      </Button>
+                    </Box>
                   </Box>
-                </Box>
-                {index !== 0 && (
-                  <Box sx={{ height: "100%" }}>
-                    <Button
-                      variant="outlined"
-                      startIcon={<RemoveIcon />}
-                      sx={{ height: "100%" }}
-                      onClick={() => RemoveField(index)}
-                    >
-                      Rem
-                    </Button>
-                  </Box>
-                )}
+                </div>
+              )}
+            </FieldArray>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                height: "50px",
+              }}
+            >
+              <Box sx={{ height: "100%" }}>
+                <StyledButton
+                  type="submit"
+                  variant="contained"
+                  sx={{ height: "100%", width: "300px" }}
+                >
+                  Submit
+                </StyledButton>
               </Box>
-            ))}
+            </Box>
           </Form>
         )}
       </Formik>
-
-      <Box
-        sx={{ display: "flex", alignItems: "center", gap: 2, height: "50px" }}
-      >
-        <Box sx={{ height: "100%" }}>
-          <Button
-            variant="outlined"
-            startIcon={<AddIcon />}
-            sx={{ height: "100%", width: "300px" }}
-            onClick={addNewField}
-          >
-            Add
-          </Button>
-        </Box>
-      </Box>
+      <ModalForValues
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        formValues={formValues}
+      />
     </Stack>
   );
 }

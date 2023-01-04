@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Navigate, useRoutes } from "react-router-dom";
 import CustomCarousel from "./carousel/CustomCarousel";
 import WrapperCheckbox from "./components/checkbox/WrapperCheckbox";
@@ -14,49 +15,45 @@ import Add from "./faqs/Add";
 import { DashBoardPage } from "./layout/DashBoardPage";
 import DashboardLayout from "./layout/Layout";
 import Login from "./login/Login";
+import Page404 from "./pages/Page404";
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  const { token } = useSelector((state) => state.authSlice);
+
   const routes = useRoutes([
     {
       path: "/login",
-      exact: true,
+      // exact: true,
       element: <Login />,
       index: true,
     },
+    token
+      ? {
+          path: "/",
+          element: <DashboardLayout />,
+          children: [
+            { path: "app", element: <DashBoardPage /> },
+            { path: "users", element: <Add /> },
+            { path: "files", element: <ImageTabs /> },
+            { path: "carousel", element: <CustomCarousel /> },
+            { path: "search", element: <Search /> },
+            { path: "input", element: <InputFields /> },
+            { path: "select", element: <Wrapper /> },
+            { path: "checkbox", element: <WrapperCheckbox /> },
+            { path: "switch", element: <WrapperSwitch /> },
+            { path: "form", element: <FormWrapper /> },
+            { path: "child1", element: <Child1 /> },
+            { path: "child2", element: <Child2 /> },
+          ],
+        }
+      : {},
+    // { path: "*", element: <Page404 /> },
     {
-      path: "/",
-      element: <DashboardLayout />,
-      children: [
-        // { element: <Navigate to="/" />, index: true },
-        { path: "app", element: <DashBoardPage /> },
-        { path: "users", element: <Add /> },
-        { path: "files", element: <ImageTabs /> },
-        { path: "carousel", element: <CustomCarousel /> },
-        { path: "search", element: <Search /> },
-        { path: "input", element: <InputFields /> },
-        { path: "select", element: <Wrapper /> },
-        { path: "checkbox", element: <WrapperCheckbox /> },
-        { path: "switch", element: <WrapperSwitch /> },
-        { path: "form", element: <FormWrapper /> },
-        { path: "child1", element: <Child1 /> },
-        { path: "child2", element: <Child2 /> },
-      ],
+      path: "*",
+      element: <Navigate to="/login" replace />,
     },
-
-    // {
-    //   element: <SimpleLayout />,
-    //   children: [
-    //     { element: <Navigate to="/dashboard/app" />, index: true },
-    //     { path: '404', element: <Page404 /> },
-    //     { path: '*', element: <Navigate to="/404" /> },
-    //   ],
-    // },
-    // {
-    //   path: '*',
-    //   element: <Navigate to="/404" replace />,
-    // },
   ]);
 
   return routes;

@@ -80,7 +80,7 @@ export default function Search({}) {
             placeholder="Search user..."
             startAdornment={
               <InputAdornment position="start">
-                <SearchIcon />
+                <SearchIcon color="primary" />
               </InputAdornment>
             }
             endAdornment={

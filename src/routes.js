@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate, useRoutes } from "react-router-dom";
 import CustomCarousel from "./carousel/CustomCarousel";
 import WrapperCheckbox from "./components/checkbox/WrapperCheckbox";
+import ConfirmModal from "./components/confirm modal/ConfirmModal";
 import FormWrapper from "./components/form/Wrapper";
 import ImageTabs from "./components/image upload/ImageTabs";
 import { InputFields } from "./components/input/InputFields";
@@ -44,6 +45,7 @@ export default function Router() {
             { path: "checkbox", element: <WrapperCheckbox /> },
             { path: "switch", element: <WrapperSwitch /> },
             { path: "form", element: <FormWrapper /> },
+            { path: "confirm", element: <ConfirmModal /> },
             { path: "child1", element: <Child1 /> },
             { path: "child2", element: <Child2 /> },
           ],

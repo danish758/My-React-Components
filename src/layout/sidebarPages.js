@@ -41,6 +41,10 @@ export const pages = [
     path: "/form",
   },
   {
+    title: "Confirmation",
+    path: "/confirm",
+  },
+  {
     title: "Parent",
     // path: "/form",
     nested: true,

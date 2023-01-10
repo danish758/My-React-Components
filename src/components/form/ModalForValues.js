@@ -31,7 +31,6 @@ export default function ModalForValues({
   const handleClose = () => {
     setOpenModal(false);
   };
-  console.log("formValues", formValues);
   return (
     <div>
       <StyledDialog
@@ -48,15 +47,6 @@ export default function ModalForValues({
             id="alert-dialog-slide-description"
             sx={{ color: "#fff", whiteSpace: "pre-wrap" }}
           >
-            {/* {formValues.map((val) => {
-              console.log("val", val);
-              return (
-                <Box sx={{ color: "#fff" }}>
-                  <Typography variant="h6">name: {val.name}</Typography>
-                </Box>
-              );
-            })} */}
-            {/* <Typography variant="h6"> */}
             {JSON.stringify(formValues, undefined, 2)}
             {/* </Typography> */}
           </DialogContentText>

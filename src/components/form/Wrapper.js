@@ -7,7 +7,15 @@ import { Button, IconButton, useMediaQuery } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Stack } from "@mui/system";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
+import {
+  ErrorMessage,
+  Field,
+  FieldArray,
+  Form,
+  Formik,
+  useFormik,
+  useFormikContext,
+} from "formik";
 import * as Yup from "yup";
 import ModalForValues from "./ModalForValues";
 
@@ -48,10 +56,8 @@ export default function FormWrapper() {
   const [reRender, setReRender] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [formValues, setFormValues] = useState([]);
-
   const handleSubmit = async (values) => {
     setReRender(!reRender);
-    console.log("values", values);
     setOpenModal(true);
     setFormValues(values);
     // alert(JSON.stringify(values));

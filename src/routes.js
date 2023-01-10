@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Navigate, useRoutes } from "react-router-dom";
 import CustomCarousel from "./carousel/CustomCarousel";
+import MuiCustomizedCarousel from "./carousel/MuiCustomizedCarousel";
 import WrapperCheckbox from "./components/checkbox/WrapperCheckbox";
 import ConfirmModal from "./components/confirm modal/ConfirmModal";
 import FormWrapper from "./components/form/Wrapper";
@@ -16,6 +17,7 @@ import Add from "./faqs/Add";
 import { DashBoardPage } from "./layout/DashBoardPage";
 import DashboardLayout from "./layout/Layout";
 import Login from "./login/Login";
+import Layout from "./pages/Layout";
 import Page404 from "./pages/Page404";
 
 // ----------------------------------------------------------------------
@@ -27,9 +29,14 @@ export default function Router() {
     {
       path: "/login",
       // exact: true,
-      element: <Login />,
+      element: (
+        <Layout>
+          <Login />
+        </Layout>
+      ),
       index: true,
     },
+
     token
       ? {
           path: "/",
@@ -38,7 +45,8 @@ export default function Router() {
             { path: "app", element: <DashBoardPage /> },
             { path: "users", element: <Add /> },
             { path: "files", element: <ImageTabs /> },
-            { path: "carousel", element: <CustomCarousel /> },
+            { path: "carousel", element: <MuiCustomizedCarousel /> },
+            // { path: "carousel", element: <CustomCarousel /> },
             { path: "search", element: <Search /> },
             { path: "input", element: <InputFields /> },
             { path: "select", element: <Wrapper /> },

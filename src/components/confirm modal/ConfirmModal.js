@@ -8,6 +8,7 @@ import styled from "@emotion/styled";
 import { Delete } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { setSnackbar } from "../../snack.service";
+import { StyledButton } from "../../common/styled/StyledComponents";
 
 export default function ConfirmationModal() {
   const [open, setOpen] = React.useState(null);
@@ -77,14 +78,9 @@ const Content = ({ handleClose, setOpen }) => {
           <Button variant="outlined" size="small" onClick={handleNo}>
             No
           </Button>
-          <Button
-            size="small"
-            variant="contained"
-            onClick={handleYes}
-            sx={{ boxShadow: "unset" }}
-          >
+          <StyledButton size="small" variant="contained" onClick={handleYes}>
             Yes
-          </Button>
+          </StyledButton>
         </Box>
       </Stack>
     </>

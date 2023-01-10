@@ -171,16 +171,16 @@ const MultiImageUpload = ({
           <div
             style={{
               display: "flex",
-              gap: "20px",
+              // gap: "20px",
               overflow: "auto",
               paddingTop: "20px",
-              justifyContent: "center",
+              // justifyContent: "center",
             }}
           >
             {previewsArray.length > 0 &&
               previewsArray.map((src, index) => (
                 <div key={index}>
-                  <div style={{ position: "relative" }}>
+                  <div style={{ position: "relative", paddingLeft: "20px" }}>
                     <img
                       src={cross}
                       width="20px"

@@ -38,8 +38,8 @@ export default function MyTable({ DATA, isFetching }) {
             direction={"row"}
             sx={{ width: "100%", justifyContent: "space-between", px: 2 }}
           >
-            <Typography variant="h6">Name</Typography>
-            <Typography variant="h6">Email</Typography>
+            <Typography variant="h6">ID</Typography>
+            <Typography variant="h6">Title</Typography>
             <Typography variant="h6">Status</Typography>
           </Stack>
         </>
@@ -69,7 +69,7 @@ export default function MyTable({ DATA, isFetching }) {
                       textAlign: "start",
                     }}
                   >
-                    {row.username}
+                    {row.id}
                   </Typography>
                 </>
 
@@ -82,7 +82,7 @@ export default function MyTable({ DATA, isFetching }) {
                     }}
                     variant="h5"
                   >
-                    {row.email}
+                    {row.title.substring(0, 25)}
                   </Typography>
                 </>
 
@@ -100,7 +100,7 @@ export default function MyTable({ DATA, isFetching }) {
                       sx={{
                         width: `60px`,
                         background: !isFetching
-                          ? row?.is_active
+                          ? row?.completed
                             ? "#a5d6a7"
                             : "#e57373"
                           : "",
@@ -108,7 +108,7 @@ export default function MyTable({ DATA, isFetching }) {
                       }}
                       variant="h5"
                     >
-                      {row?.is_active ? "active" : "InActive"}
+                      {row?.completed ? "Done" : "Pending"}
                     </Typography>
                   </Typography>
                 </>

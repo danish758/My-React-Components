@@ -3,7 +3,13 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Button, IconButton, useMediaQuery } from "@mui/material";
+import {
+  Button,
+  Container,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Stack } from "@mui/system";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -64,131 +70,138 @@ export default function FormWrapper() {
   };
 
   return (
-    <Stack spacing={2}>
-      <Formik
-        initialValues={{
-          friends: [
-            {
-              name: "",
-            },
-          ],
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, handleChange, handleBlur, touched, errors }) => (
-          <Form>
-            <FieldArray name="friends">
-              {({ insert, remove, push }) => (
-                <div>
-                  {values.friends.length > 0 &&
-                    values.friends.map((friend, index) => (
-                      <>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 2,
-                            height: "50px",
-                            width: !isMobile ? "400px" : "300px",
-                            mt: 2,
-                          }}
-                        >
-                          <Box sx={{ width: "300px", height: "100%" }}>
-                            <Box sx={{ height: "100%", width: "100%" }}>
-                              <StyledTextField
-                                key={index}
-                                id="filled-basic"
-                                variant="standard"
-                                name={`friends.${index}.name`}
-                                value={values.friends[index]?.name}
-                                onChange={handleChange}
-                                borderRadius="3px"
-                                borderColor={
-                                  touched.friends &&
-                                  touched.friends[index]?.name &&
-                                  errors.friends &&
-                                  errors.friends[index]?.name
-                                    ? "red"
-                                    : "#9e9e9e"
-                                }
-                                InputProps={{
-                                  disableUnderline: true,
-                                }}
-                                placeholder="Enter text here.."
-                                onBlur={handleBlur}
-                              />
+    <Container maxWidth="md">
+      <Box sx={{ textAlign: "left", mb: 4 }}>
+        <Typography variant="paragraph">
+          These dynamic input fields are managed with formik.
+        </Typography>
+      </Box>
+      <Stack spacing={2}>
+        <Formik
+          initialValues={{
+            friends: [
+              {
+                name: "",
+              },
+            ],
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ values, handleChange, handleBlur, touched, errors }) => (
+            <Form>
+              <FieldArray name="friends">
+                {({ insert, remove, push }) => (
+                  <div>
+                    {values.friends.length > 0 &&
+                      values.friends.map((friend, index) => (
+                        <>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 2,
+                              height: "50px",
+                              width: !isMobile ? "400px" : "300px",
+                              mt: 2,
+                            }}
+                          >
+                            <Box sx={{ width: "300px", height: "100%" }}>
+                              <Box sx={{ height: "100%", width: "100%" }}>
+                                <StyledTextField
+                                  key={index}
+                                  id="filled-basic"
+                                  variant="standard"
+                                  name={`friends.${index}.name`}
+                                  value={values.friends[index]?.name}
+                                  onChange={handleChange}
+                                  borderRadius="3px"
+                                  borderColor={
+                                    touched.friends &&
+                                    touched.friends[index]?.name &&
+                                    errors.friends &&
+                                    errors.friends[index]?.name
+                                      ? "red"
+                                      : "#9e9e9e"
+                                  }
+                                  InputProps={{
+                                    disableUnderline: true,
+                                  }}
+                                  placeholder="Enter text here.."
+                                  onBlur={handleBlur}
+                                />
+                              </Box>
+                            </Box>
+
+                            <Box sx={{ height: "100%" }}>
+                              <Button
+                                variant="outlined"
+                                startIcon={<RemoveIcon />}
+                                sx={{ height: "100%" }}
+                                onClick={() => remove(index)}
+                              >
+                                Rem
+                              </Button>
                             </Box>
                           </Box>
+                          <ErrorMessage
+                            name={`friends.${index}.name`}
+                            component="div"
+                            style={{ textAlign: "justify", color: "red" }}
+                          />
+                        </>
+                      ))}
 
-                          <Box sx={{ height: "100%" }}>
-                            <Button
-                              variant="outlined"
-                              startIcon={<RemoveIcon />}
-                              sx={{ height: "100%" }}
-                              onClick={() => remove(index)}
-                            >
-                              Rem
-                            </Button>
-                          </Box>
-                        </Box>
-                        <ErrorMessage
-                          name={`friends.${index}.name`}
-                          component="div"
-                          style={{ textAlign: "justify", color: "red" }}
-                        />
-                      </>
-                    ))}
-
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 2,
-                      height: "50px",
-                      my: 1,
-                    }}
-                  >
-                    <Box sx={{ height: "100%" }}>
-                      <Button
-                        variant="outlined"
-                        startIcon={<AddIcon />}
-                        sx={{ height: "100%", width: "300px" }}
-                        onClick={() => push({ name: "" })}
-                      >
-                        Add
-                      </Button>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 2,
+                        height: "50px",
+                        my: 1,
+                      }}
+                    >
+                      <Box sx={{ height: "100%" }}>
+                        <Button
+                          variant="outlined"
+                          startIcon={<AddIcon />}
+                          sx={{ height: "100%", width: "300px" }}
+                          onClick={() => push({ name: "" })}
+                        >
+                          Add
+                        </Button>
+                      </Box>
                     </Box>
-                  </Box>
-                </div>
-              )}
-            </FieldArray>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 2,
-                height: "50px",
-              }}
-            >
-              <Box sx={{ height: "100%" }}>
-                <StyledButton
-                  type="submit"
-                  variant="contained"
-                  sx={{ height: "100%", width: "300px" }}
-                >
-                  Submit
-                </StyledButton>
+                  </div>
+                )}
+              </FieldArray>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  height: "50px",
+                }}
+              >
+                <Box sx={{ height: "100%" }}>
+                  <StyledButton
+                    type="submit"
+                    variant="contained"
+                    sx={{ height: "100%", width: "300px" }}
+                  >
+                    Submit
+                  </StyledButton>
+                </Box>
               </Box>
-            </Box>
-          </Form>
-        )}
-      </Formik>
-      <ModalForValues
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        formValues={formValues}
-      />
-    </Stack>
+            </Form>
+          )}
+        </Formik>
+        <ModalForValues
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          formValues={formValues}
+        />
+      </Stack>
+    </Container>
   );
 }

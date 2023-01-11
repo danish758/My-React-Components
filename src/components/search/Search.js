@@ -7,6 +7,8 @@ import {
   Typography,
   OutlinedInput,
   InputAdornment,
+  Container,
+  useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { CenderedBox } from "../../common/styled/StyledComponents";
@@ -45,6 +47,8 @@ export default function Search({}) {
   const { data: { data: { results = [] } = {} } = {}, isFetching } =
     useGetSearchResultQuery(filterName);
 
+  const isMobile = useMediaQuery("(max-width:500px)");
+
   const onChange = (e) => {
     const val = e.target.value;
     setFilterName(val);
@@ -64,10 +68,15 @@ export default function Search({}) {
   };
 
   return (
-    <CenderedBox width={"100%"} onClick={() => setShow("none")}>
-      <Box
-      // sx={{ width: "400px" }}
-      >
+    <Container maxWidth="xl" sx={{ mt: 4 }} onClick={() => setShow("none")}>
+      <Box sx={{ textAlign: "left", mb: 4 }}>
+        <Typography variant="paragraph">
+          This search input is built using Textfield and paper component of MUI.
+          Although Mui gives Autocomplete component but it's harder to customize
+          it according to website requirment.
+        </Typography>
+      </Box>
+      <Box sx={{ width: isMobile ? "auto" : "400px" }}>
         <StyledRoot
           sx={{
             color: "primary.main",
@@ -98,6 +107,7 @@ export default function Search({}) {
               </InputAdornment>
             }
             fullWidth
+            // sx={{ width: "30%" }}
             onClick={(e) => handleTextFieldClick(e)}
           />
         </StyledRoot>
@@ -111,6 +121,6 @@ export default function Search({}) {
           />
         </Box>
       </Box>
-    </CenderedBox>
+    </Container>
   );
 }

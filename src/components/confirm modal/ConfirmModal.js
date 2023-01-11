@@ -3,7 +3,7 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Box, Stack } from "@mui/system";
-import { Tooltip } from "@mui/material";
+import { Container, Tooltip } from "@mui/material";
 import styled from "@emotion/styled";
 import { Delete } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
@@ -23,30 +23,39 @@ export default function ConfirmationModal() {
   };
 
   return (
-    <div>
-      <Typography variant="h6" sx={{ mb: 3 }}>
-        Click to preview
-      </Typography>
-      <Tooltip
-        open={open}
-        arrow
-        // onClose={handleClose}
-        onClick={handleOpen}
-        title={<Content handleClose={handleClose} setOpen={setOpen} />}
-        componentsProps={{
-          tooltip: {
-            sx: {
-              bgcolor: "#fff",
-              "& .MuiTooltip-arrow": {
-                color: "#fff",
+    <Container maxWidth="md">
+      <Box sx={{ textAlign: "left", mb: 4 }}>
+        <Typography variant="paragraph">
+          We often use these type of confirmations but Mui does not provide us
+          these components. I styled Mui Tooltip to design this confirmation
+          component.
+        </Typography>
+      </Box>
+      <Box sx={{ textAlign: "left" }}>
+        <Typography variant="h6" sx={{ mb: 3 }}>
+          Click to preview
+        </Typography>
+        <Tooltip
+          open={open}
+          arrow
+          // onClose={handleClose}
+          onClick={handleOpen}
+          title={<Content handleClose={handleClose} setOpen={setOpen} />}
+          componentsProps={{
+            tooltip: {
+              sx: {
+                bgcolor: "#fff",
+                "& .MuiTooltip-arrow": {
+                  color: "#fff",
+                },
               },
             },
-          },
-        }}
-      >
-        <Button startIcon={<Delete />}>Delete</Button>
-      </Tooltip>
-    </div>
+          }}
+        >
+          <Button startIcon={<Delete />}>Delete</Button>
+        </Tooltip>
+      </Box>
+    </Container>
   );
 }
 

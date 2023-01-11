@@ -11,21 +11,28 @@ import TablePagination from "../components/pagination/TablePagination";
 import { LOADER } from "./loader/Loading";
 import Table2 from "./Table2";
 import MyTable from "./MyTable";
+import { useGetToDosQuery } from "../redux/services/todos.service";
 
 const Add = () => {
+  const [page, setpage] = useState(1);
+  const [start, setStart] = useState(0);
   const auth = useSelector((state) => console.log("state", state));
   const [addFAQ, { isLoading }] = useAddFAQMutation();
-  const isMobile = useMediaQuery("(max-width:600px)");
-
-  const [page, setpage] = useState(1);
   const {
     isLoading: fetchLoading,
     isFetching,
     data = {},
-  } = useGetSubAdminsQuery(page);
+  } = useGetToDosQuery(start);
+  console.log("todos", data);
+  const isMobile = useMediaQuery("(max-width:600px)");
+
+  // const {
+  //   isLoading: fetchLoading,
+  //   isFetching,
+  //   data = {},
+  // } = useGetSubAdminsQuery(page);
   console.log("page", page);
-  const { count, results = [], previous, next } = data;
-  const { addfaqs = {} } = useSelector((state) => state);
+  // const { addfaqs = {} } = useSelector((state) => state);
   const dispatch = useDispatch();
   const addFaq = async () => {
     // debugger;
@@ -58,7 +65,7 @@ const Add = () => {
           </LoadingButton>
         </Box> */}
       <>
-        <MyTable DATA={results} isFetching={isFetching} />
+        <MyTable DATA={data} isFetching={isFetching} />
       </>
 
       <Box
@@ -72,7 +79,8 @@ const Add = () => {
         <TablePagination
           page={page}
           setpage={setpage}
-          count={Math.ceil(count / 10)}
+          setStart={setStart}
+          count={20}
         />
       </Box>
     </Box>

@@ -1,9 +1,12 @@
 import { Pagination, PaginationItem } from "@mui/material";
 import React from "react";
 
-const TablePagination = ({ setpage, count, page }) => {
+const TablePagination = ({ setpage, count, page, setStart }) => {
   console.log("page", page);
   const handlePagination = (e, page) => {
+    const p = (page - 1) * 10;
+    console.log("pageeee", p);
+    setStart(p);
     setpage(page);
   };
   return (

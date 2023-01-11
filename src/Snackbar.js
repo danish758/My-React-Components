@@ -6,11 +6,14 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSnackbar } from "./snack.service";
+import { Slide } from "@mui/material";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
+function TransitionLeft(props) {
+  return <Slide {...props} direction="left" />;
+}
 export default function SnackBar() {
   let dispatch = useDispatch();
   let { message, severity, status } = useSelector(
@@ -24,11 +27,12 @@ export default function SnackBar() {
     <Stack spacing={2} sx={{ width: "100%" }}>
       <Snackbar
         open={status}
-        autoHideDuration={2000}
+        autoHideDuration={3000}
         anchorOrigin={{
           vertical: "top",
           horizontal: "right",
         }}
+        TransitionComponent={TransitionLeft}
         aria-describedby="client-snackbar"
         onClose={handleClose}
       >

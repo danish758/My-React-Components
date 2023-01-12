@@ -6,7 +6,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import ImageUpload from "./ImageUpload";
 import MultiImageUpload from "./FilesUpload";
-import { useMediaQuery } from "@mui/material";
+import { Container, Typography, useMediaQuery } from "@mui/material";
 
 export default function ImageTabs() {
   const [value, setValue] = React.useState("1");
@@ -25,10 +25,14 @@ export default function ImageTabs() {
   };
 
   return (
-    <Box
+    <Container
     // sx={{ display: "flex", justifyContent: "center", mt: 8 }}
     >
       <Box>
+        <Typography sx={{ textAlign: "left" }}>
+          Both these components created from scratch without any library. That's
+          why we can customize it easily according to our design.
+        </Typography>
         <TabContext value={value}>
           <Box
             sx={{
@@ -63,6 +67,6 @@ export default function ImageTabs() {
           </TabPanel>
         </TabContext>
       </Box>
-    </Box>
+    </Container>
   );
 }

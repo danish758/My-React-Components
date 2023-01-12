@@ -1,4 +1,4 @@
-import { Box, Button, useMediaQuery } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSnackbar } from "../snack.service";
@@ -25,7 +25,21 @@ const Add = () => {
   } = useGetToDosQuery(start);
   console.log("todos", data);
   const isMobile = useMediaQuery("(max-width:600px)");
+  const COLUMNS = [
+    {
+      title: "ID",
+      dataKey: "id",
+    },
+    {
+      title: "Title",
+      dataKey: "title",
+    },
 
+    {
+      title: "Status",
+      dataKey: "id",
+    },
+  ];
   // const {
   //   isLoading: fetchLoading,
   //   isFetching,
@@ -54,7 +68,7 @@ const Add = () => {
     }
   };
   return (
-    <Box sx={{ overflowX: isMobile ? "auto" : "unset" }}>
+    <Box sx={{ overflowX: isMobile ? "auto" : "unset", maxWidth: "md" }}>
       {/* <Box sx={{ textAlign: "right" }}>
           <LoadingButton
             loading={isLoading}
@@ -64,8 +78,24 @@ const Add = () => {
             Create Sub Admin
           </LoadingButton>
         </Box> */}
+      <Box sx={{ textAlign: "left", mb: 3, mx: 2 }}>
+        <Typography variant="h5">
+          This table and Skeleton is designed from scratch.Data is fetched from
+          mock api with help of{" "}
+          <span style={{ fontWeight: "bold", fontSize: "15px" }}>
+            <a
+              href="https://redux-toolkit.js.org/tutorials/rtk-query"
+              style={{ textDecoration: "none", color: "green" }}
+            >
+              Redux Toolkit Query
+            </a>
+          </span>
+          .Once data is fetched ,it will be cached for 1 minute.No doubt this
+          cache time can be increased.
+        </Typography>
+      </Box>
       <>
-        <MyTable DATA={data} isFetching={isFetching} />
+        <MyTable DATA={data} COLUMNS={COLUMNS} isFetching={isFetching} />
       </>
 
       <Box

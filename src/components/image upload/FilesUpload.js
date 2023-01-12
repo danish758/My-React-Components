@@ -138,7 +138,7 @@ const MultiImageUpload = ({
         <div
           style={{
             width: isMobile ? "100%" : "40vw",
-            minHeight: isMobile ? "35vh" : "40vh",
+            minHeight: isMobile ? "31vh" : "40vh",
             // border: "1px dashed black",
             boxShadow: " 0 3px 10px rgb(0 0 0 / 0.2)",
             padding: isMobile ? "10px" : "30px",
@@ -158,7 +158,7 @@ const MultiImageUpload = ({
             }}
           >
             <h3>Upload Files</h3>
-            <UploadFileIcon sx={{ fontSize: 100 }} />
+            <UploadFileIcon sx={{ fontSize: { xs: 60, sm: 100 } }} />
           </div>
           <input
             ref={ref}

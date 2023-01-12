@@ -7,10 +7,10 @@ import SidebarList from "./SidebarList";
 
 // ----------------------------------------------------------------------
 
-export const Sidebar = () => {
+export const Sidebar = ({ handleDrawerClose }) => {
   return (
     <>
-      <SidebarList />
+      <SidebarList handleDrawerClose={handleDrawerClose} />
     </>
   );
 };

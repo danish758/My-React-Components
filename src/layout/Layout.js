@@ -20,7 +20,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const DashboardLayout = () => {
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:1024px)");
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.authSlice);
@@ -39,7 +39,7 @@ const DashboardLayout = () => {
           <Sidebar />
         </Box>
       ) : (
-        <Box sx={{ float: "left" }}>
+        <Box sx={{ float: "left", mb: 3 }}>
           <IconButton onClick={handleDrawerOpen}>
             <MenuIcon />
           </IconButton>
@@ -71,7 +71,7 @@ const DashboardLayout = () => {
       >
         <Divider />
         <Box sx={{ width: "100%" }}>
-          <Sidebar />
+          <Sidebar handleDrawerClose={handleDrawerClose} />
         </Box>
       </Drawer>
     </Box>

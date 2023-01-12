@@ -31,7 +31,8 @@ const StyledListItem = styled(ListItem)({
   },
 });
 
-export default function SidebarList() {
+export default function SidebarList({ handleDrawerClose }) {
+  const isMobile = useMediaQuery("(max-width:1024px)");
   const { selectedItemSlice: { selectedIndex: SelectedIndex = 0 } = {} } =
     useSelector((state) => state);
   const [selectedIndex, setSelectedIndex] = React.useState(SelectedIndex);
@@ -42,8 +43,8 @@ export default function SidebarList() {
     setSelectedIndex(item.path);
     dispatch(setSelectedItem(item?.path));
     navigate(item.path);
+    isMobile && handleDrawerClose();
   };
-  const isMobile = useMediaQuery("(max-width:1000px)");
 
   React.useEffect(() => {
     pages.map((page) => {

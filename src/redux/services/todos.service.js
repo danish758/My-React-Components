@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const toDoService = createApi({
   reducerPath: "toDos",
-  keepUnusedDataFor: 5,
+  keepUnusedDataFor: 60,
   baseQuery: fetchBaseQuery({
     baseUrl: "https://jsonplaceholder.typicode.com",
   }),

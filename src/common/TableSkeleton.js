@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function TableSkeleton({ COLUMNS_COUNT }) {
+export default function TableSkeleton({ COLUMNS }) {
   const DATA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   console.log("DATA", DATA);
 
@@ -45,40 +45,19 @@ export default function TableSkeleton({ COLUMNS_COUNT }) {
                 background: "#fff",
                 borderRadius: "24px",
               }}
-              // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <>
-                <Typography
-                  variant="h5"
-                  sx={{
-                    width: `calc(100% / ${COLUMNS_COUNT})`,
-                  }}
-                >
-                  <Skeleton animation="wave" sx={{ width: "95%" }} />
-                </Typography>
-              </>
-
-              <>
-                <Typography
-                  sx={{
-                    width: `calc(100% / ${COLUMNS_COUNT})`,
-                  }}
-                  variant="h5"
-                >
-                  <Skeleton animation="wave" sx={{ width: "95%" }} />
-                </Typography>
-              </>
-
-              <>
-                <Typography
-                  sx={{
-                    width: `calc(100% / ${COLUMNS_COUNT})`,
-                  }}
-                  variant="h5"
-                >
-                  <Skeleton animation="wave" sx={{ width: "95%" }} />
-                </Typography>
-              </>
+              {COLUMNS.map(() => (
+                <>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      width: `calc(100% / ${COLUMNS.length})`,
+                    }}
+                  >
+                    <Skeleton animation="wave" sx={{ width: "95%" }} />
+                  </Typography>
+                </>
+              ))}
             </Stack>
           ))}
         </>

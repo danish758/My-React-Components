@@ -13,17 +13,9 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import { Stack } from "@mui/system";
 import RemoveIcon from "@mui/icons-material/Remove";
-import {
-  ErrorMessage,
-  Field,
-  FieldArray,
-  Form,
-  Formik,
-  useFormik,
-  useFormikContext,
-} from "formik";
+import { ErrorMessage, FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
-import ModalForValues from "./ModalForValues";
+import Modal from "./Modal";
 
 const StyledTextField = styled(TextField)(
   ({ theme, background, borderColor, borderRadius }) => ({
@@ -196,10 +188,11 @@ export default function FormWrapper() {
             </Form>
           )}
         </Formik>
-        <ModalForValues
+        <Modal
           openModal={openModal}
           setOpenModal={setOpenModal}
-          formValues={formValues}
+          modalData={JSON.stringify(formValues, undefined, 2)}
+          ModalHeading={"Form Values"}
         />
       </Stack>
     </Container>

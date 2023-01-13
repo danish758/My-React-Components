@@ -17,7 +17,6 @@ import { Box } from "@mui/system";
 
 export default function TableSkeleton({ COLUMNS }) {
   const DATA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  console.log("DATA", DATA);
 
   const isMobile = useMediaQuery("(max-width:600px)");
   return (

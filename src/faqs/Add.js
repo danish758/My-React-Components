@@ -16,14 +16,13 @@ import { useGetToDosQuery } from "../redux/services/todos.service";
 const Add = () => {
   const [page, setpage] = useState(1);
   const [start, setStart] = useState(0);
-  const auth = useSelector((state) => console.log("state", state));
+
   const [addFAQ, { isLoading }] = useAddFAQMutation();
   const {
     isLoading: fetchLoading,
     isFetching,
     data = {},
   } = useGetToDosQuery(start);
-  console.log("todos", data);
   const isMobile = useMediaQuery("(max-width:600px)");
   const COLUMNS = [
     {
@@ -37,16 +36,11 @@ const Add = () => {
 
     {
       title: "Status",
-      dataKey: "id",
+      dataKey: "completed",
+      renderItem: true,
     },
   ];
-  // const {
-  //   isLoading: fetchLoading,
-  //   isFetching,
-  //   data = {},
-  // } = useGetSubAdminsQuery(page);
-  console.log("page", page);
-  // const { addfaqs = {} } = useSelector((state) => state);
+
   const dispatch = useDispatch();
   const addFaq = async () => {
     // debugger;
@@ -57,7 +51,6 @@ const Add = () => {
       username: "test user",
       group_ids: [14],
     });
-    console.log("res", resp);
     if (resp?.data?.status) {
       dispatch(
         setSnackbar({ message: resp?.data?.Response, severity: "success" })
@@ -85,6 +78,7 @@ const Add = () => {
           <span style={{ fontWeight: "bold", fontSize: "15px" }}>
             <a
               href="https://redux-toolkit.js.org/tutorials/rtk-query"
+              target="_blank"
               style={{ textDecoration: "none", color: "green" }}
             >
               Redux Toolkit Query

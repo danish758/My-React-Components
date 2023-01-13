@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { LoadingButton } from "@mui/lab";
-import { Box, Button } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 
 export const CenderedBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -22,3 +22,12 @@ export const StyledLoadingButton = styled(LoadingButton)(({ theme }) => ({
     boxShadow: "none",
   },
 }));
+
+export const StyledTextField = styled(TextField)(
+  ({ theme, background, borderColor, borderRadius }) => ({
+    background: background,
+    borderRadius: borderRadius,
+    padding: "5px",
+    border: `1px solid ${borderColor}`,
+  })
+);

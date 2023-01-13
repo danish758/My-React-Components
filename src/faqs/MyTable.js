@@ -9,13 +9,19 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import TableSkeleton from "../common/TableSkeleton";
+import Modal from "../components/form/Modal";
+import { useState } from "react";
 
 export default function MyTable({ DATA, COLUMNS, isFetching }) {
-  console.log("DATA", DATA);
-  console.log("isFetching", isFetching);
+  const [openModal, setOpenModal] = useState(false);
+  const [modalData, setModalData] = useState({});
 
   const isMobile = useMediaQuery("(max-width:600px)");
   // const COLUMNS_COUNT = COLUMNS.length;
+  const showRecord = (record) => {
+    setModalData(record);
+    setOpenModal(true);
+  };
   return (
     <Box
       sx={{
@@ -68,22 +74,38 @@ export default function MyTable({ DATA, COLUMNS, isFetching }) {
                   py: 1,
                   background: "#fff",
                   borderRadius: "24px",
+                  cursor: "pointer",
                 }}
+                onClick={() => showRecord(row)}
               >
                 {COLUMNS.map((col) => {
                   return (
                     <>
-                      <Typography
-                        variant="h5"
-                        sx={{
-                          // width: `calc(100% / ${COLUMNS_COUNT})`,
-                          wordBreak: "break-all",
-                        }}
-                      >
-                        {col.dataKey == "title"
-                          ? row[col.dataKey].substring(0, 10)
-                          : row[col.dataKey]}
-                      </Typography>
+                      {!col.renderItem ? (
+                        <Typography
+                          variant="h5"
+                          sx={{
+                            // width: `calc(100% / ${COLUMNS_COUNT})`,
+                            wordBreak: "break-all",
+                          }}
+                        >
+                          {col.dataKey == "title"
+                            ? row[col.dataKey].substring(0, 10)
+                            : row[col.dataKey]}
+                        </Typography>
+                      ) : (
+                        <Typography
+                          variant="h5"
+                          sx={{
+                            bgcolor: row[col.dataKey] ? "#66bb6a" : "#e57373",
+                            borderRadius: "10px",
+                            p: "2px",
+                            minWidth: "80px",
+                          }}
+                        >
+                          {row[col.dataKey] ? "Done" : "Pending"}
+                        </Typography>
+                      )}
                     </>
                   );
                 })}
@@ -94,6 +116,12 @@ export default function MyTable({ DATA, COLUMNS, isFetching }) {
           <TableSkeleton COLUMNS={COLUMNS} />
         )}
       </Box>
+      <Modal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        modalData={modalData}
+        ModalHeading={"Selected Record"}
+      />
     </Box>
   );
 }

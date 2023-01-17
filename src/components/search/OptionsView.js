@@ -12,10 +12,28 @@ export default function OptionsView({
   fetching,
   setFilterName,
   setShow,
+  setLimit,
+  total,
 }) {
+  const [previousTop, setPreviousTop] = React.useState(0);
   const selectItem = (selected) => {
     setShow("none");
     setFilterName(selected);
+  };
+  const handleScroll = (e) => {
+    if (previousTop < e.target.scrollTop) {
+      // console.log("Height", e.target.scrollHeight);
+      console.log("scrollTop", e.target.scrollTop);
+      if (
+        e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight &&
+        options.length < total
+      ) {
+        setLimit((prev) => prev + 10);
+      }
+    } else {
+      console.log("user scroll to top");
+    }
+    setPreviousTop(e.target.scrollTop);
   };
   return (
     <Stack direction="row" spacing={2}>
@@ -29,14 +47,13 @@ export default function OptionsView({
             maxHeight: "200px",
             overflow: "auto",
           }}
+          onScroll={handleScroll}
         >
           <MenuList onClick={(e) => e.stopPropagation()}>
             {!fetching && options.length != 0 ? (
-              options.map((option) => (
-                <MenuItem
-                  onClick={() => selectItem(option.question.slice(0, 20))}
-                >
-                  {option.question.slice(0, 20)}
+              options.map((user, ind) => (
+                <MenuItem onClick={() => selectItem(user.firstName)}>
+                  {ind}--{user.firstName}
                 </MenuItem>
               ))
             ) : !fetching && options.length == 0 ? (

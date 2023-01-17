@@ -99,7 +99,7 @@ export default function MyTable({ DATA, COLUMNS, isFetching }) {
                           sx={{
                             bgcolor: row[col.dataKey] ? "#66bb6a" : "#e57373",
                             borderRadius: "10px",
-                            p: "2px",
+                            // p: "2px",
                             minWidth: "80px",
                           }}
                         >

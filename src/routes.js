@@ -37,28 +37,29 @@ export default function Router() {
       index: true,
     },
 
-    token
-      ? {
-          path: "/",
-          element: <DashboardLayout />,
-          children: [
-            { path: "app", element: <DashBoardPage /> },
-            { path: "users", element: <Add /> },
-            { path: "files", element: <ImageTabs /> },
-            { path: "carousel", element: <MuiCustomizedCarousel /> },
-            // { path: "carousel", element: <CustomCarousel /> },
-            { path: "search", element: <Search /> },
-            { path: "input", element: <InputFields /> },
-            { path: "select", element: <Wrapper /> },
-            { path: "checkbox", element: <WrapperCheckbox /> },
-            { path: "switch", element: <WrapperSwitch /> },
-            { path: "form", element: <FormWrapper /> },
-            { path: "confirm", element: <ConfirmModal /> },
-            { path: "child1", element: <Child1 /> },
-            { path: "child2", element: <Child2 /> },
-          ],
-        }
-      : {},
+    // token
+    //   ?
+    {
+      path: "/",
+      element: <DashboardLayout />,
+      children: [
+        { path: "app", element: <DashBoardPage /> },
+        { path: "users", element: <Add /> },
+        { path: "files", element: <ImageTabs /> },
+        { path: "carousel", element: <MuiCustomizedCarousel /> },
+        // { path: "carousel", element: <CustomCarousel /> },
+        { path: "search", element: <Search /> },
+        { path: "input", element: <InputFields /> },
+        { path: "select", element: <Wrapper /> },
+        { path: "checkbox", element: <WrapperCheckbox /> },
+        { path: "switch", element: <WrapperSwitch /> },
+        { path: "form", element: <FormWrapper /> },
+        { path: "confirm", element: <ConfirmModal /> },
+        { path: "child1", element: <Child1 /> },
+        { path: "child2", element: <Child2 /> },
+      ],
+    },
+    // : {},
     // { path: "*", element: <Page404 /> },
     {
       path: "*",

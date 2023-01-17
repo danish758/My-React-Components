@@ -1,7 +1,7 @@
 export const pages = [
   {
     title: "Dashboard",
-    path: "/app",
+    path: "/",
     // icon: icon("ic_analytics"),
   },
   {

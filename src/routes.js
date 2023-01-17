@@ -43,7 +43,7 @@ export default function Router() {
       path: "/",
       element: <DashboardLayout />,
       children: [
-        { path: "app", element: <DashBoardPage /> },
+        { path: "/", element: <DashBoardPage /> },
         { path: "users", element: <Add /> },
         { path: "files", element: <ImageTabs /> },
         { path: "carousel", element: <MuiCustomizedCarousel /> },
@@ -63,7 +63,7 @@ export default function Router() {
     // { path: "*", element: <Page404 /> },
     {
       path: "*",
-      element: <Navigate to="/login" replace />,
+      element: <Page404 />,
     },
   ]);
 

@@ -116,6 +116,11 @@ export const theme = createTheme(Theme, {
       lineHeight: "19px",
       // fontWeight: "700",
     },
+    h3: {
+      fontSize: "16px",
+      lineHeight: "19px",
+      // fontWeight: "700",
+    },
     h4: {
       fontSize: "30px",
       lineHeight: "25px",

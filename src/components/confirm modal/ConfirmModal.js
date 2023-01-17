@@ -9,6 +9,7 @@ import { Delete } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { setSnackbar } from "../../snack.service";
 import { StyledButton } from "../../common/styled/StyledComponents";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 export default function ConfirmationModal() {
   const [open, setOpen] = React.useState(null);
@@ -31,30 +32,32 @@ export default function ConfirmationModal() {
           component.
         </Typography>
       </Box>
-      <Box sx={{ textAlign: "left" }}>
-        <Typography variant="h6" sx={{ mb: 3 }}>
-          Click to preview
-        </Typography>
-        <Tooltip
-          open={open}
-          arrow
-          // onClose={handleClose}
-          onClick={handleOpen}
-          title={<Content handleClose={handleClose} setOpen={setOpen} />}
-          componentsProps={{
-            tooltip: {
-              sx: {
-                bgcolor: "#fff",
-                "& .MuiTooltip-arrow": {
-                  color: "#fff",
+      <ClickAwayListener onClickAway={handleClose}>
+        <Box sx={{ textAlign: "left" }}>
+          <Typography variant="h6" sx={{ mb: 3 }}>
+            Click to preview
+          </Typography>
+          <Tooltip
+            open={open}
+            arrow
+            // onClose={handleClose}
+            onClick={handleOpen}
+            title={<Content handleClose={handleClose} setOpen={setOpen} />}
+            componentsProps={{
+              tooltip: {
+                sx: {
+                  bgcolor: "#fff",
+                  "& .MuiTooltip-arrow": {
+                    color: "#fff",
+                  },
                 },
               },
-            },
-          }}
-        >
-          <Button startIcon={<Delete />}>Delete</Button>
-        </Tooltip>
-      </Box>
+            }}
+          >
+            <Button startIcon={<Delete />}>Delete</Button>
+          </Tooltip>
+        </Box>
+      </ClickAwayListener>
     </Container>
   );
 }

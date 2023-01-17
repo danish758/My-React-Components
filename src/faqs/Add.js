@@ -12,10 +12,31 @@ import { LOADER } from "./loader/Loading";
 import Table2 from "./Table2";
 import MyTable from "./MyTable";
 import { useGetToDosQuery } from "../redux/services/todos.service";
+import axios from "axios";
 
 const Add = () => {
   const [page, setpage] = useState(1);
   const [start, setStart] = useState(0);
+  // useEffect(() => {
+  //   postLambda();
+  // }, []);
+
+  // const postLambda = async () => {
+  //   try {
+  //     const res = await axios.post(
+  //       "https://auma7xdjs25hp7rjzgwrrnqloa0krref.lambda-url.us-east-1.on.aws/",
+  //       {
+  //         key: "Warranty_Deed.pdf",
+
+  //         title: "Paul Toofan",
+
+  //         address: "16822 Eagle Bluff Court, Chesterfield",
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const [addFAQ, { isLoading }] = useAddFAQMutation();
   const {

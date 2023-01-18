@@ -78,7 +78,7 @@ function MuiCustomizedCarousel() {
   }
 
   // If last group doesn't have enough
-  // elements then add 0 to it
+  // elements then skip it
   if (temp.length != 0) {
     let a = temp.length;
     while (a != SIZE) {

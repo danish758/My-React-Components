@@ -20,7 +20,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const DashboardLayout = () => {
-  const isMobile = useMediaQuery("(max-width:1024px)");
+  const isMobile = useMediaQuery("(max-width:1199px)");
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.authSlice);

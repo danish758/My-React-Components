@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate, useRoutes } from "react-router-dom";
+import CarouselWrapper from "./carousel/CarouselWrapper";
 import CustomCarousel from "./carousel/CustomCarousel";
 import MuiCustomizedCarousel from "./carousel/MuiCustomizedCarousel";
 import WrapperCheckbox from "./components/checkbox/WrapperCheckbox";
@@ -46,7 +47,7 @@ export default function Router() {
         { path: "/", element: <DashBoardPage /> },
         { path: "users", element: <Add /> },
         { path: "files", element: <ImageTabs /> },
-        { path: "carousel", element: <MuiCustomizedCarousel /> },
+        { path: "carousel", element: <CarouselWrapper /> },
         // { path: "carousel", element: <CustomCarousel /> },
         { path: "search", element: <Search /> },
         { path: "input", element: <InputFields /> },

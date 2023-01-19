@@ -15,6 +15,18 @@ const ImageUpload = () => {
   const handleClick = (e) => {
     ref.current.click();
   };
+  const handleDragOver = (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copy"; // Show "copy" cursor
+  };
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = URL.createObjectURL(event.dataTransfer.files[0]);
+    setFile(file);
+
+    // Do something with the files, such as uploading them to a server
+    // ...
+  };
   return (
     <div
       style={{ marginTop: "20vh", display: "flex", justifyContent: "center" }}
@@ -26,6 +38,8 @@ const ImageUpload = () => {
           border: "1px dashed gray",
           borderRadius: "4px",
         }}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
       >
         <Box
           // component="label"

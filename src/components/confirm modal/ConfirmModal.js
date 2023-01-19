@@ -43,6 +43,16 @@ export default function ConfirmationModal() {
             // onClose={handleClose}
             onClick={handleOpen}
             title={<Content handleClose={handleClose} setOpen={setOpen} />}
+            PopperProps={{
+              modifiers: [
+                {
+                  name: "offset",
+                  options: {
+                    offset: [0, -12],
+                  },
+                },
+              ],
+            }}
             componentsProps={{
               tooltip: {
                 sx: {

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Container } from "@mui/system";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { Box, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { useTheme } from "@emotion/react";
 import useResponsive from "../common/useResponsive";
 
@@ -37,10 +43,18 @@ function SampleNextArrow(props) {
 }
 
 export default function ReactSlickCarousel() {
+  const [activePage, setactivePage] = useState(1);
   const isMobile = useResponsive("down", "sm");
   const isTab = useResponsive("down", "md");
   const isLaptop = useResponsive("up", "lg");
   console.log("isLaptop", isLaptop);
+  const slider = useRef();
+  const next = () => {
+    slider.current.slickNext();
+  };
+  const previous = () => {
+    slider.current.slickPrev();
+  };
   const images = [
     {
       label: "San Francisco – Oakland Bay Bridge, United States",
@@ -89,27 +103,30 @@ export default function ReactSlickCarousel() {
     },
   ];
   var settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
+    beforeChange: (oldIndex, newIndex) => {
+      setactivePage(newIndex + 1);
+    },
+    dots: isMobile ? false : true,
+    infinite: true,
     slidesToShow: isMobile ? 1 : isTab ? 2 : 3,
     // autoplay: true,
-    speed: 1000,
+    speed: 300,
     // autoplaySpeed: 2000,
-    // cssEase: "linear",
+    cssEase: "linear",
     slidesToScroll: 1,
+    arrows: isMobile ? false : true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
+  console.log("activePage", activePage);
   return (
     <Container
       fixed
       sx={{
         background: "#fff",
-        py: 8,
+        py: isMobile ? 2 : 8,
         maxWidth: {
-          xs: "320px",
+          xs: "100vw",
           sm: "sm",
           md: "md",
           xl: "xl",
@@ -119,10 +136,10 @@ export default function ReactSlickCarousel() {
       <Box
         sx={{
           background: "#fff",
-          px: 2,
+          px: isMobile ? 0 : 2,
         }}
       >
-        <Slider {...settings}>
+        <Slider {...settings} ref={(c) => (slider.current = c)}>
           {images.map((img, ind) => (
             <Box>
               <Box
@@ -131,7 +148,7 @@ export default function ReactSlickCarousel() {
                   height: 355,
                   overflow: "hidden",
                   width: "100%",
-                  px: 2,
+                  px: { sm: 2 },
                 }}
                 src={img.imgPath}
                 // alt={step.label}
@@ -139,6 +156,21 @@ export default function ReactSlickCarousel() {
             </Box>
           ))}
         </Slider>
+        {isMobile && (
+          <Stack
+            direction={"row"}
+            justifyContent="space-between"
+            alignItems={"center"}
+          >
+            <IconButton onClick={previous}>
+              <KeyboardArrowLeft />
+            </IconButton>
+            <Typography variant="h6">{`${activePage}/${images.length}`}</Typography>
+            <IconButton onClick={next}>
+              <KeyboardArrowRight />
+            </IconButton>
+          </Stack>
+        )}
       </Box>
     </Container>
   );
